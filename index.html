@@ -187,6 +187,8 @@
     .shot { position: relative; overflow: hidden; border-radius: var(--radius); background: var(--burgundy-900); grid-column: span 2; }
     .shot.feature { grid-column: span 4; grid-row: span 2; }
     .shot.tall { grid-row: span 2; }
+    .shot.half { grid-column: span 3; }
+    .shot.full { grid-column: 1 / -1; }
     .shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease, filter .3s; }
     .shot:hover img { transform: scale(1.04); filter: brightness(.75); }
     .shot-label {
@@ -309,9 +311,10 @@
       .about-photo { max-width: 420px; margin-inline: auto; order: -1; }
       .service-list, .jobs { grid-template-columns: 1fr; }
       .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-      .shot, .shot.feature { grid-column: span 1; grid-row: span 1; }
-      .shot.feature { grid-column: span 2; grid-row: span 2; }
-      .shot.tall { grid-row: span 1; }
+      .shot, .shot.feature, .shot.half { grid-column: span 1; grid-row: span 1; }
+      .shot.feature, .shot.full { grid-column: 1 / -1; grid-row: span 2; }
+      .shot.full { grid-row: span 1; }
+      .shot.tall { grid-row: span 2; }
     }
     @media (max-width: 760px) {
       section { padding: 72px 0; }
@@ -570,11 +573,33 @@
     // image = صورة الغلاف، link = الرابط اللي بينفتح (انستغرام، يوتيوب، درايف...)
     // أول عمل بيطلع كبير بالمعرض، فحط أقوى شغل أول شي
     const WORKS = [
-      { type: "promo", title: "مونتاج بروموهات الفعاليات", image: "لقطة-مونتاج.jpg", link: "https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" },
-      { type: "reel",  title: "ريلز على انستغرام",          image: "sharing_my_premiere_pro_timeline_anyone_else_likes_to_keep_v0_lpic1lajgegc1.webp", link: "https://www.instagram.com/hamza_ellawi/reposts/" },
-      { type: "promo", title: "تصحيح ألوان وتلوين سينمائي",  image: "fast_rgb_three_way-780x380.webp", link: "https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" },
-      { type: "photo", title: "صور الفعاليات والبورتريه",    image: "images/portrait.jpg", link: "https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" },
-      { type: "reel",  title: "مقاطع قصيرة للمنصات",         image: "professional-video-editing-time-line-260nw-1863644794.webp", link: "https://www.instagram.com/hamza_ellawi/reposts/" },
+      { type: "promo", title: "معرض دمشق الدولي، النسخة 63", image: "images/works/promo-07.webp", link: "https://drive.google.com/file/d/10RYMpo71vrgee-Izd_2aIu-5AFjWmChG/view" },
+      { type: "promo", title: "برومو وزارة الأوقاف السورية", image: "images/works/promo-02.webp", link: "https://drive.google.com/file/d/1eLI2xeF9egJkRkYMUs5rjUv3xTFDE_ET/view" },
+      { type: "promo", title: "جولة وزير الثقافة في مدينة تدمر", image: "images/works/promo-05.webp", link: "https://drive.google.com/file/d/1Oz-pzLT4HDOxHPlMokBmkgv4stgegFKf/view" },
+      { type: "promo", title: "برومو ملتقى مديريات وزارة الثقافة", image: "images/works/promo-03.webp", link: "https://drive.google.com/file/d/1KiPFgS24KhNXhSUyjvYCXdUCba-cbEBO/view" },
+      { type: "promo", title: "برومو الملتقى السوري لفن الخط العربي", image: "images/works/promo-01.webp", link: "https://drive.google.com/file/d/1tBYG8xUN-12WYI_g5-lKscEXRdcmSLOA/view" },
+      { type: "promo", title: "جولة وزير الثقافة في مدينة القطيفة", image: "images/works/promo-04.webp", link: "https://drive.google.com/file/d/16zl2XvgEJ0R3-Qm5esguKYfZlWkrC6HK/view" },
+      { type: "promo", title: "دمشق القديمة", image: "images/works/promo-06.webp", link: "https://drive.google.com/file/d/1-O6v79zCJORPsA8FoikO7M94l4LJhGWA/view" },
+      { type: "reel", title: "الدكتور محمد عبد الرحيم سلطان العلماء", image: "images/works/reel-02.webp", link: "https://drive.google.com/file/d/1pw9VRJ7kqtrcD9XKeSt8eB-hoIuZsYZX/view" },
+      { type: "reel", title: "الملتقى السوري لفن الخط العربي والزخرفة", image: "images/works/reel-03.webp", link: "https://drive.google.com/file/d/1jGy7_T6lQx28xbPP-_z8xNn29_IMyxcx/view" },
+      { type: "reel", title: "المهرجان الدولي للشعر العربي", image: "images/works/reel-04.webp", link: "https://drive.google.com/file/d/1KoioczdASDQXOmpJdt9C28StU--D6uT7/view" },
+      { type: "reel", title: "الحياة الطبية", image: "images/works/reel-01.webp", link: "https://drive.google.com/file/d/1Z7oQeHWCbyDIq6jHEHRkBKDHmtL7xe6a/view" },
+      { type: "reel", title: "دورة المحاسبة لغير المختصين", image: "images/works/reel-06.webp", link: "https://drive.google.com/file/d/1dGcGybUk6kuTTA8GTPj55vCuavBmvlif/view" },
+      { type: "reel", title: "تعديل الألوان", image: "images/works/reel-05.webp", link: "https://drive.google.com/file/d/1nIftpr-UWNcAaOz4FOdYPdwK-2JZjcKE/view" },
+      { type: "photo", image: "images/works/photo-08.webp", link: "images/works/photo-08.webp" },
+      { type: "photo", image: "images/works/photo-02.webp", link: "images/works/photo-02.webp" },
+      { type: "photo", image: "images/works/photo-04.webp", link: "images/works/photo-04.webp" },
+      { type: "photo", image: "images/works/photo-06.webp", link: "images/works/photo-06.webp" },
+      { type: "photo", image: "images/works/photo-07.webp", link: "images/works/photo-07.webp" },
+      { type: "photo", image: "images/works/photo-10.webp", link: "images/works/photo-10.webp" },
+      { type: "photo", image: "images/works/photo-03.webp", link: "images/works/photo-03.webp" },
+      { type: "photo", image: "images/works/photo-05.webp", link: "images/works/photo-05.webp" },
+      { type: "photo", image: "images/works/photo-11.webp", link: "images/works/photo-11.webp" },
+      { type: "photo", image: "images/works/photo-01.webp", link: "images/works/photo-01.webp" },
+      { type: "photo", image: "images/works/photo-09.webp", link: "images/works/photo-09.webp" },
+      { type: "motion", title: "معرض دمشق الدولي 63", image: "images/works/motion-01.webp", link: "https://drive.google.com/file/d/1smezMzTxKlXiD6yk-0U9PJ1ieP0S7hlU/view" },
+      { type: "motion", title: "وزارة الثقافة، مديرية الفعاليات", image: "images/works/motion-03.webp", link: "https://drive.google.com/file/d/1dBQkgxlQX7l07Hxhln5fHxlz18PYmc7d/view" },
+      { type: "motion", title: "معرض ناستكس للنسيج السوري", image: "images/works/motion-02.webp", link: "https://drive.google.com/file/d/1Xv4cq6tRN0rF4CMhQA3nYnUEbO97uYxR/view" },
     ];
 
     const LABELS = { promo: "برومو", reel: "ريل", photo: "صورة", video: "فيديو", drone: "درون", motion: "موشن غرافيك" };
@@ -610,8 +635,18 @@
     addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    // المعرض: أول عمل كبير، التاني طويل، والباقي عادي
+    // المعرض: أول عمل كبير، التاني طويل، والباقي عادي، وآخر سطر ناقص بيتمدّد ليعبّي العرض
+    // الريلز عمودية، فكلها بتطلع طويلة
     const gallery = document.getElementById("gallery");
+    function shotClass(type, i, count) {
+      if (count === 1) return " full";
+      if (type === "reel") return " tall";
+      if (i === 0) return " feature";
+      if (i === 1) return " tall";
+      const rest = count - 2, pos = i - 2, left = rest % 3;
+      if (pos >= rest - left) return left === 1 ? " full" : " half";
+      return "";
+    }
     function renderGallery(filter) {
       gallery.innerHTML = "";
       const items = WORKS.filter(w => w.type === filter);
@@ -621,11 +656,11 @@
       }
       items.forEach((w, i) => {
         const a = document.createElement("a");
-        a.className = "shot" + (i === 0 ? " feature" : i === 1 ? " tall" : "");
-        if (items.length === 1) a.style.gridColumn = "1 / -1";
+        a.className = "shot" + shotClass(w.type, i, items.length);
         a.href = w.link; a.target = "_blank"; a.rel = "noopener";
-        a.innerHTML = `<img src="${w.image}" alt="${w.title}" loading="lazy">
-          <span class="shot-label"><small>${LABELS[w.type]}</small>${w.title}</span>`;
+        const alt = w.title || "صورة من أعمال حمزة علاوي";
+        a.innerHTML = `<img src="${w.image}" alt="${alt}" loading="lazy">` +
+          (w.title ? `<span class="shot-label"><small>${LABELS[w.type]}</small>${w.title}</span>` : "");
         gallery.appendChild(a);
       });
     }
