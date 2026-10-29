@@ -154,7 +154,7 @@
     .about-photo img { border-radius: var(--radius); aspect-ratio: 4/5; object-fit: cover; object-position: center 35%; width: 100%; }
 
     /* ===== Services: قائمة مرقّمة ===== */
-    .services { background: var(--cream); }
+    .works { background: var(--cream); }
     .service-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; counter-reset: svc; }
     .service {
       display: grid; grid-template-columns: 72px 1fr; gap: 16px; padding: 28px 0;
@@ -356,8 +356,8 @@
       </a>
       <ul class="nav-links" id="nav-links">
         <li><a href="#about">من أنا</a></li>
-        <li><a href="#services">الخدمات</a></li>
         <li><a href="#works">بعض أعمالي</a></li>
+        <li><a href="#services">الخدمات</a></li>
         <li><a href="#experience">الخبرات</a></li>
         <li><a href="#contact">طرق التواصل</a></li>
       </ul>
@@ -405,6 +405,26 @@
       </div>
     </section>
 
+    <!-- بعض أعمالي -->
+    <section class="works" id="works">
+      <div class="wrap">
+        <div class="title-row center reveal"><h2>بعض أعمالي</h2></div>
+        <div class="filters" role="group" aria-label="تصنيف الأعمال">
+          <button class="filter" aria-pressed="true" data-filter="promo">برومو</button>
+          <button class="filter" aria-pressed="false" data-filter="reel">ريلز</button>
+          <button class="filter" aria-pressed="false" data-filter="photo">صور</button>
+          <button class="filter" aria-pressed="false" data-filter="video">فيديو</button>
+          <button class="filter" aria-pressed="false" data-filter="drone">درون</button>
+          <button class="filter" aria-pressed="false" data-filter="motion">موشن غرافيك</button>
+        </div>
+        <div class="gallery" id="gallery"></div>
+        <div class="gallery-links">
+          <a class="btn btn-solid" href="https://www.instagram.com/hamza_ellawi/reposts/" target="_blank" rel="noopener">المزيد على انستغرام</a>
+          <a class="btn btn-line" href="https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" target="_blank" rel="noopener">الأرشيف الكامل على Drive</a>
+        </div>
+      </div>
+    </section>
+
     <!-- الخدمات -->
     <section class="services" id="services">
       <div class="wrap">
@@ -424,26 +444,6 @@
           </article>
         </div>
         <p class="tools reveal">أعمل على <strong>Adobe Premiere Pro</strong> للمونتاج وتصحيح الألوان.</p>
-      </div>
-    </section>
-
-    <!-- بعض أعمالي -->
-    <section class="works" id="works">
-      <div class="wrap">
-        <div class="title-row center reveal"><h2>بعض أعمالي</h2></div>
-        <div class="filters" role="group" aria-label="تصنيف الأعمال">
-          <button class="filter" aria-pressed="true" data-filter="promo">برومو</button>
-          <button class="filter" aria-pressed="false" data-filter="reel">ريلز</button>
-          <button class="filter" aria-pressed="false" data-filter="photo">صور</button>
-          <button class="filter" aria-pressed="false" data-filter="video">فيديو</button>
-          <button class="filter" aria-pressed="false" data-filter="drone">درون</button>
-          <button class="filter" aria-pressed="false" data-filter="motion">موشن غرافيك</button>
-        </div>
-        <div class="gallery" id="gallery"></div>
-        <div class="gallery-links">
-          <a class="btn btn-solid" href="https://www.instagram.com/hamza_ellawi/reposts/" target="_blank" rel="noopener">المزيد على انستغرام</a>
-          <a class="btn btn-line" href="https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" target="_blank" rel="noopener">الأرشيف الكامل على Drive</a>
-        </div>
       </div>
     </section>
 
