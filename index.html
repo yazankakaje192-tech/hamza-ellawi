@@ -253,6 +253,28 @@
     .wa-float svg { width: 24px; height: 24px; }
     .js .wa-float:not(.show) { opacity: 0; pointer-events: none; transform: translateY(20px); }
 
+    /* ===== فورم ما قبل الواتساب ===== */
+    .wa-dialog {
+      width: min(440px, calc(100% - 32px)); padding: 0; border: 0; border-radius: 12px;
+      background: var(--white); color: var(--ink); box-shadow: 0 30px 80px -20px rgba(46,7,14,.6);
+    }
+    .wa-dialog::backdrop { background: rgba(46,7,14,.6); backdrop-filter: blur(3px); }
+    .wa-dialog form { padding: 28px; display: grid; gap: 16px; }
+    .wa-dialog-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+    .wa-dialog h3 { margin: 0; font-size: 1.35rem; color: var(--burgundy-800); line-height: 1.4; }
+    .wa-dialog-head p { margin: 2px 0 0; color: var(--muted); font-size: .95rem; }
+    .wa-close { background: none; border: 0; font-size: 1.8rem; line-height: 1; color: var(--muted); cursor: pointer; padding: 0 4px; }
+    .wa-dialog label { display: grid; gap: 6px; font-weight: 700; font-size: .95rem; color: var(--burgundy-800); }
+    .wa-dialog label small { font-weight: 400; color: var(--muted); }
+    .wa-dialog input, .wa-dialog select, .wa-dialog textarea {
+      font: inherit; font-weight: 400; color: var(--ink); background: var(--cream);
+      border: 1.5px solid var(--line); border-radius: var(--radius); padding: 10px 12px; width: 100%;
+    }
+    .wa-dialog textarea { resize: vertical; min-height: 84px; }
+    .wa-dialog input:focus, .wa-dialog select:focus, .wa-dialog textarea:focus { outline: none; border-color: var(--burgundy-500); background: var(--white); }
+    .wa-submit { justify-content: center; background: #25D366; color: #fff; border: 0; cursor: pointer; font-family: inherit; }
+    .wa-submit:hover { background: #1fb457; }
+
     /* حركة ظهور خفيفة، والمحتوى ظاهر حتى لو ما اشتغل الجافاسكربت */
     .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
     .js .reveal.in { opacity: 1; transform: none; }
@@ -470,6 +492,37 @@
     <span>راسلني</span>
   </a>
 
+  <dialog class="wa-dialog" id="wa-dialog" aria-labelledby="wa-title">
+    <form id="wa-form" method="dialog">
+      <div class="wa-dialog-head">
+        <div>
+          <h3 id="wa-title">قبل ما نبلّش</h3>
+          <p>عبّي هالتفاصيل وبتنفتح رسالتك جاهزة على الواتساب.</p>
+        </div>
+        <button type="button" class="wa-close" id="wa-close" aria-label="إغلاق">×</button>
+      </div>
+      <label>الاسم
+        <input name="name" required autocomplete="name" placeholder="اسمك الكريم">
+      </label>
+      <label>الخدمة المطلوبة
+        <select name="service" required>
+          <option value="مونتاج">مونتاج</option>
+          <option value="تصوير فوتوغرافي">تصوير فوتوغرافي</option>
+          <option value="تصحيح ألوان">تصحيح ألوان</option>
+          <option value="تغطية فعالية">تغطية فعالية</option>
+          <option value="شي تاني">شي تاني</option>
+        </select>
+      </label>
+      <label><span>تفاصيل الفكرة <small>(اختياري)</small></span>
+        <textarea name="details" placeholder="الموعد، المكان، أو أي فكرة عندك..."></textarea>
+      </label>
+      <button type="submit" class="btn wa-submit">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zM12 0a12 12 0 0 0-10.3 18L0 24l6.2-1.6A12 12 0 1 0 12 0z"/></svg>
+        متابعة على واتساب
+      </button>
+    </form>
+  </dialog>
+
   <script>
     /* =====================================================
        الإعدادات: عدّل هون فقط لإضافة الأعمال والإيميل
@@ -539,6 +592,30 @@
       renderGallery(btn.dataset.filter);
     }));
     renderGallery("all");
+
+    // فورم صغير قبل الواتساب: كل روابط الواتساب بتفتحه، وبعدين بتنفتح الرسالة جاهزة
+    const WA_NUMBER = "963996522320";
+    const waDialog = document.getElementById("wa-dialog");
+    const waForm = document.getElementById("wa-form");
+    if (typeof waDialog.showModal === "function") {
+      document.querySelectorAll('a[href^="https://wa.me/"]').forEach(a => a.addEventListener("click", e => {
+        e.preventDefault();
+        nav.classList.remove("open");
+        waDialog.showModal();
+      }));
+      document.getElementById("wa-close").addEventListener("click", () => waDialog.close());
+      waDialog.addEventListener("click", e => { if (e.target === waDialog) waDialog.close(); });
+      waForm.addEventListener("submit", e => {
+        e.preventDefault();
+        const f = new FormData(waForm);
+        let text = `مرحبا حمزة، أنا ${f.get("name").trim()}.\nبدي خدمة: ${f.get("service")}`;
+        const details = f.get("details").trim();
+        if (details) text += `\n\n${details}`;
+        window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+        waDialog.close();
+        waForm.reset();
+      });
+    }
 
     // حركة الظهور
     const io = new IntersectionObserver(entries => entries.forEach(e => {
