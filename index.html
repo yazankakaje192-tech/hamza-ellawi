@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>محمد حمزة علاوي | مونتاج وتصوير وإنتاج مرئي</title>
+  <meta name="description" content="محمد حمزة علاوي، صانع محتوى مرئي من سوريا: مونتاج احترافي، تصوير فوتوغرافي، تصحيح ألوان وتغطية فعاليات. شاهد أعمالي وتواصل معي.">
+  <meta name="theme-color" content="#4A0D17">
+
+  <!-- مشاركة الرابط على واتساب وفيسبوك -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_SY">
+  <meta property="og:title" content="محمد حمزة علاوي | إنتاج مرئي">
+  <meta property="og:description" content="مونتاج · تصوير فوتوغرافي · تصحيح ألوان · تغطية فعاليات">
+  <meta property="og:url" content="https://hamza-ellawi.netlify.app/">
+  <meta property="og:image" content="https://hamza-ellawi.netlify.app/images/portrait.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234A0D17'/%3E%3Crect x='12' y='22' width='40' height='28' rx='5' fill='none' stroke='%23F1D9A6' stroke-width='4'/%3E%3Cpath d='M24 22l3-6h10l3 6' fill='none' stroke='%23F1D9A6' stroke-width='4' stroke-linejoin='round'/%3E%3Ccircle cx='32' cy='36' r='7' fill='%23F1D9A6'/%3E%3C/svg%3E">
+
+  <style>
+    @font-face { font-family: "Qomra"; src: url("itfQomraArabic-Light.otf") format("opentype"); font-weight: 300; font-display: swap; }
+    @font-face { font-family: "Qomra"; src: url("itfQomraArabic-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Qomra"; src: url("itfQomraArabic-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+
+    :root {
+      --burgundy-900: #2E070E;
+      --burgundy-800: #4A0D17;
+      --burgundy-700: #6B1424;
+      --burgundy-500: #9B2C40;
+      --beige: #F1D9A6;
+      --beige-soft: #F8EBD0;
+      --cream: #FBF5EA;
+      --white: #FFFFFF;
+      --ink: #2A1A1D;
+      --muted: #6E5A5E;
+      --line: #EADFD2;
+      --radius: 8px;
+      --wrap: 1140px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      margin: 0;
+      font-family: "Qomra", "Tajawal", system-ui, sans-serif;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--wrap), 100% - 32px); margin-inline: auto; }
+    section { padding: 96px 0; }
+
+    /* عنوان القسم: العنوان وبعده خط لآخر السطر */
+    .title-row { display: flex; align-items: center; gap: 24px; margin-bottom: 48px; }
+    .title-row h2 { margin: 0; white-space: nowrap; }
+    .title-row::after { content: ""; flex: 1; height: 2px; background: linear-gradient(to left, var(--beige), transparent); }
+    h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); line-height: 1.3; color: var(--burgundy-800); }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 26px; border-radius: var(--radius); font-weight: 700; font-size: 1rem;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .btn svg { width: 20px; height: 20px; flex: none; }
+    .btn-solid { background: var(--burgundy-800); color: var(--beige); border: 2px solid var(--burgundy-800); }
+    .btn-solid:hover { background: var(--burgundy-700); border-color: var(--burgundy-700); }
+    .btn-line { border: 2px solid var(--burgundy-800); color: var(--burgundy-800); }
+    .btn-line:hover { background: var(--burgundy-800); color: var(--beige); }
+    .btn-beige { background: var(--beige); color: var(--burgundy-900); border: 2px solid var(--beige); }
+    .btn-beige:hover { background: var(--white); border-color: var(--white); }
+
+    /* ===== Header ===== */
+    .nav {
+      position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.94);
+      backdrop-filter: blur(8px); border-bottom: 1px solid transparent; transition: border-color .3s;
+    }
+    .nav.scrolled { border-bottom-color: var(--line); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: var(--burgundy-800); font-weight: 700; font-size: 1.15rem; }
+    .brand-mark { width: 34px; height: 34px; }
+    .nav-links { display: flex; gap: 30px; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { color: var(--ink); font-size: .98rem; padding: 6px 0; border-bottom: 2px solid transparent; transition: border-color .2s, color .2s; }
+    .nav-links a:hover { color: var(--burgundy-700); border-bottom-color: var(--beige); }
+    .nav .btn { padding: 9px 20px; font-size: .92rem; }
+    .menu-btn { display: none; background: none; border: 0; color: var(--burgundy-800); padding: 8px; cursor: pointer; }
+    .menu-btn svg { width: 28px; height: 28px; }
+
+    /* ===== Hero: الصورة على شاشة كاميرا ===== */
+    .hero { background: var(--cream); padding: 64px 0 0; text-align: center; overflow: hidden; }
+    .hero h1 { font-size: clamp(2.6rem, 7.5vw, 5rem); line-height: 1.15; margin: 0 0 10px; color: var(--burgundy-800); }
+    .hero-tag { color: var(--muted); font-size: clamp(1.05rem, 2.4vw, 1.3rem); margin: 0 0 30px; }
+    .hero-tag b { color: var(--burgundy-500); font-weight: 400; margin: 0 6px; }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+
+    .camera {
+      direction: ltr; position: relative; width: min(620px, 100%); margin: 0 auto;
+      background: linear-gradient(170deg, var(--burgundy-700), var(--burgundy-900));
+      border-radius: 30px 30px 0 0; padding: 26px 150px 0 26px;
+      box-shadow: 0 -10px 60px -20px rgba(74,13,23,.5);
+    }
+    /* عين الكاميرا والزر العلوي */
+    .camera::before {
+      content: ""; position: absolute; top: -34px; left: 34%; width: 130px; height: 38px;
+      background: var(--burgundy-700); border-radius: 14px 14px 0 0;
+    }
+    .camera::after {
+      content: ""; position: absolute; top: -16px; right: 46px; width: 54px; height: 18px;
+      background: var(--burgundy-900); border-radius: 8px 8px 0 0;
+    }
+    .camera-screen {
+      position: relative; border-radius: 10px 10px 0 0; overflow: hidden; background: #000;
+      border: 8px solid #1B0307; border-bottom: 0; aspect-ratio: 4/3;
+    }
+    .camera-screen img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .camera-controls {
+      position: absolute; top: 34px; right: 26px; width: 100px; display: flex; flex-direction: column; align-items: center; gap: 22px;
+    }
+    .cam-dial {
+      width: 74px; height: 74px; border-radius: 50%; background: var(--burgundy-900);
+      border: 3px solid rgba(241,217,166,.55); position: relative;
+    }
+    .cam-dial::before, .cam-dial::after { content: ""; position: absolute; background: rgba(241,217,166,.55); border-radius: 2px; }
+    .cam-dial::before { width: 3px; height: 16px; top: 6px; left: 50%; transform: translateX(-50%); }
+    .cam-dial::after { width: 22px; height: 22px; border-radius: 50%; inset: 0; margin: auto; background: var(--burgundy-700); border: 2px solid rgba(241,217,166,.35); }
+    .cam-btns { display: grid; grid-template-columns: repeat(2, 26px); gap: 12px; }
+    .cam-btns i { width: 26px; height: 26px; border-radius: 50%; background: var(--burgundy-900); box-shadow: inset 0 0 0 2px rgba(241,217,166,.3); }
+    .cam-brand { color: rgba(241,217,166,.75); font-size: .8rem; letter-spacing: .3em; font-weight: 700; }
+
+    /* ===== About ===== */
+    .about .wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center; }
+    .about-text p { color: var(--muted); font-size: 1.08rem; margin: 0 0 16px; }
+    .about-text .title-row { margin-bottom: 28px; }
+    .about-photo { position: relative; }
+    .about-photo img { border-radius: var(--radius); aspect-ratio: 4/5; object-fit: cover; object-position: center 35%; width: 100%; }
+    .about-photo figcaption {
+      position: absolute; top: 24px; left: -16px; background: var(--beige); color: var(--burgundy-900);
+      padding: 10px 18px; border-radius: 4px; font-weight: 700; transform: rotate(-3deg); box-shadow: 0 10px 24px -10px rgba(0,0,0,.35);
+    }
+    .facts { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--line); }
+    .facts li { flex: 1 1 0; min-width: 120px; padding: 18px 0 0; }
+    .facts li + li { border-right: 1px solid var(--line); padding-right: 20px; }
+    .facts b { display: block; font-size: 2rem; color: var(--burgundy-800); line-height: 1.2; }
+    .facts span { font-size: .92rem; color: var(--muted); }
+
+    /* ===== Services: قائمة مرقّمة ===== */
+    .services { background: var(--cream); }
+    .service-list { display: grid; grid-template-columns: 1fr 1fr; column-gap: 64px; counter-reset: svc; }
+    .service {
+      display: grid; grid-template-columns: 72px 1fr; gap: 16px; padding: 28px 0;
+      border-top: 1px solid var(--line); counter-increment: svc;
+    }
+    .service::before {
+      content: counter(svc, decimal-leading-zero); font-size: 2.6rem; line-height: 1; font-weight: 700;
+      color: transparent; -webkit-text-stroke: 1.5px var(--burgundy-500);
+    }
+    .service h3 { margin: 0 0 6px; font-size: 1.25rem; color: var(--burgundy-800); }
+    .service p { margin: 0; color: var(--muted); }
+    .tools { margin-top: 36px; color: var(--muted); }
+    .tools strong { color: var(--burgundy-800); }
+
+    /* ===== Works: معرض بشكل مجلة ===== */
+    .filters { display: flex; gap: 28px; flex-wrap: wrap; margin: -20px 0 32px; border-bottom: 1px solid var(--line); }
+    .filter {
+      font: inherit; font-size: 1.05rem; background: none; border: 0; padding: 10px 0; margin-bottom: -1px; cursor: pointer;
+      color: var(--muted); border-bottom: 3px solid transparent; transition: color .2s, border-color .2s;
+    }
+    .filter:hover { color: var(--burgundy-800); }
+    .filter[aria-pressed="true"] { color: var(--burgundy-800); font-weight: 700; border-bottom-color: var(--burgundy-800); }
+    .gallery { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 210px; gap: 14px; }
+    .shot { position: relative; overflow: hidden; border-radius: var(--radius); background: var(--burgundy-900); grid-column: span 2; }
+    .shot.feature { grid-column: span 4; grid-row: span 2; }
+    .shot.tall { grid-row: span 2; }
+    .shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s ease, filter .3s; }
+    .shot:hover img { transform: scale(1.04); filter: brightness(.75); }
+    .shot-label {
+      position: absolute; bottom: 0; right: 0; max-width: 85%;
+      background: var(--white); color: var(--burgundy-800); padding: 10px 16px; border-top-left-radius: var(--radius);
+      font-weight: 700; line-height: 1.4;
+    }
+    .shot-label small { display: block; color: var(--burgundy-500); font-weight: 400; font-size: .82rem; }
+    .gallery-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+
+    /* ===== Experience ===== */
+    .experience { background: var(--cream); }
+    .jobs { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .job { background: var(--white); border-radius: var(--radius); padding: 30px; border-top: 4px solid var(--burgundy-800); }
+    .job-head { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .job img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 2px solid var(--beige); flex: none; }
+    .job h3 { margin: 0; font-size: 1.25rem; color: var(--burgundy-800); line-height: 1.4; }
+    .job-org { color: var(--burgundy-500); font-size: .95rem; }
+    .job p { margin: 0; color: var(--muted); }
+
+    /* ===== Contact: قائمة سطور ===== */
+    .contact { background: var(--burgundy-800); color: var(--white); }
+    .contact .wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
+    .contact h2 { color: var(--white); margin: 0 0 16px; }
+    .contact h2 span { color: var(--beige); }
+    .contact-intro p { color: rgba(255,255,255,.75); font-size: 1.1rem; margin: 0 0 28px; }
+    .contact-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(241,217,166,.25); }
+    .contact-list li[hidden] { display: none; }
+    .contact-list a {
+      display: grid; grid-template-columns: 130px 1fr 24px; align-items: center; gap: 12px;
+      padding: 20px 4px; border-bottom: 1px solid rgba(241,217,166,.25); transition: background .2s, padding .2s;
+    }
+    .contact-list a:hover { background: rgba(241,217,166,.08); padding-inline: 14px; }
+    .contact-list .k { color: var(--beige); font-weight: 700; }
+    .contact-list .v { color: rgba(255,255,255,.85); direction: ltr; text-align: right; }
+    .contact-list svg { width: 20px; height: 20px; color: var(--beige); }
+
+    footer { background: var(--burgundy-900); color: rgba(255,255,255,.55); padding: 26px 0; font-size: .9rem; }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .socials { display: flex; gap: 18px; }
+    .socials a { color: rgba(255,255,255,.7); transition: color .2s; }
+    .socials a:hover { color: var(--beige); }
+    .socials svg { width: 22px; height: 22px; }
+
+    .wa-float {
+      position: fixed; bottom: 22px; left: 22px; z-index: 60; display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 18px 12px 14px; border-radius: var(--radius); background: #25D366; color: #fff; font-weight: 700;
+      box-shadow: 0 10px 30px -8px rgba(37,211,102,.6); transition: opacity .3s, transform .3s;
+    }
+    .wa-float svg { width: 24px; height: 24px; }
+    .js .wa-float:not(.show) { opacity: 0; pointer-events: none; transform: translateY(20px); }
+
+    /* حركة ظهور خفيفة، والمحتوى ظاهر حتى لو ما اشتغل الجافاسكربت */
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
+    .js .reveal.in { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 960px) {
+      .about .wrap, .contact .wrap { grid-template-columns: 1fr; gap: 44px; }
+      .about-photo { max-width: 420px; margin-inline: auto; order: -1; }
+      .service-list, .jobs { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
+      .shot, .shot.feature { grid-column: span 1; grid-row: span 1; }
+      .shot.feature { grid-column: span 2; grid-row: span 2; }
+      .shot.tall { grid-row: span 1; }
+    }
+    @media (max-width: 760px) {
+      section { padding: 72px 0; }
+      .nav-links, .nav .btn { display: none; }
+      .menu-btn { display: block; }
+      .nav.open .nav-links {
+        display: flex; flex-direction: column; gap: 0; position: absolute; top: 72px; inset-inline: 0;
+        background: var(--white); padding: 4px 16px 16px; border-bottom: 1px solid var(--line);
+      }
+      .nav.open .nav-links a { display: block; padding: 12px 4px; font-size: 1.05rem; border-bottom: 1px solid var(--line); }
+      .hero { padding-top: 44px; }
+      .hero-actions { margin-bottom: 52px; }
+      .camera { padding: 16px 84px 0 16px; border-radius: 22px 22px 0 0; }
+      .camera::before { width: 80px; height: 26px; top: -24px; }
+      .camera::after { right: 24px; width: 36px; }
+      .camera-screen { border-width: 5px; }
+      .camera-controls { right: 12px; top: 22px; width: 60px; gap: 14px; }
+      .cam-dial { width: 46px; height: 46px; }
+      .cam-dial::before { height: 10px; top: 4px; }
+      .cam-dial::after { width: 14px; height: 14px; }
+      .cam-btns { grid-template-columns: repeat(2, 18px); gap: 8px; }
+      .cam-btns i { width: 18px; height: 18px; }
+      .cam-brand { font-size: .62rem; letter-spacing: .2em; }
+      .title-row { gap: 16px; margin-bottom: 36px; }
+      .contact-list a { grid-template-columns: 96px 1fr 20px; }
+      .wa-float span { display: none; }
+      .wa-float { padding: 14px; border-radius: 50%; }
+    }
+    @media (max-width: 520px) {
+      .gallery { grid-template-columns: 1fr; grid-auto-rows: 230px; }
+      .shot.feature { grid-column: span 1; grid-row: span 1; }
+      .about-photo figcaption { left: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap">
+      <a href="#hero" class="brand" aria-label="الصفحة الرئيسية">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#4A0D17"/><rect x="12" y="22" width="40" height="28" rx="5" fill="none" stroke="#F1D9A6" stroke-width="4"/><path d="M24 22l3-6h10l3 6" fill="none" stroke="#F1D9A6" stroke-width="4" stroke-linejoin="round"/><circle cx="32" cy="36" r="7" fill="#F1D9A6"/></svg>
+        حمزة علاوي
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">من أنا</a></li>
+        <li><a href="#services">الخدمات</a></li>
+        <li><a href="#works">بعض أعمالي</a></li>
+        <li><a href="#experience">الخبرات</a></li>
+        <li><a href="#contact">طرق التواصل</a></li>
+      </ul>
+      <a href="https://wa.me/963996522320" target="_blank" rel="noopener" class="btn btn-solid">احجز موعد</a>
+      <button class="menu-btn" id="menu-btn" aria-label="فتح القائمة" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- الواجهة: الصورة معروضة على شاشة كاميرا -->
+    <section class="hero" id="hero">
+      <div class="wrap">
+        <h1>محمد حمزة علاوي</h1>
+        <p class="hero-tag">مونتاج احترافي <b>·</b> تصوير فوتوغرافي <b>·</b> تصحيح ألوان</p>
+        <div class="hero-actions">
+          <a href="#works" class="btn btn-solid">تصفّح المعرض</a>
+          <a href="https://wa.me/963996522320" target="_blank" rel="noopener" class="btn btn-line">اطلب خدمة</a>
+        </div>
+        <div class="camera">
+          <div class="camera-screen">
+            <img src="images/portrait.jpg" alt="محمد حمزة علاوي" width="1280" height="720">
+          </div>
+          <div class="camera-controls" aria-hidden="true">
+            <span class="cam-dial"></span>
+            <span class="cam-btns"><i></i><i></i><i></i><i></i></span>
+            <span class="cam-brand">HAMZA</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- من أنا -->
+    <section class="about" id="about">
+      <div class="wrap">
+        <div class="about-text reveal">
+          <div class="title-row"><h2>من أنا ؟</h2></div>
+          <p>أنا محمد حمزة علاوي، خبير إنتاج مرئي أجمع بين الجانب التقني الصرف والجمال الفني السينمائي. شغفي يكمن في تحويل اللقطات العادية إلى قصص بصرية مبهرة.</p>
+          <p>صقل عملي مع مؤسسات رسمية ودينية قدرتي على إدارة المحتوى وتوجيهه ليكون مؤثراً وهادفاً، من لحظة التصوير حتى آخر لمسة لون.</p>
+          <ul class="facts">
+            <li><b>+5</b><span>سنوات خبرة</span></li>
+            <li><b>2</b><span>جهة رسمية ودينية</span></li>
+            <li><b>3</b><span>مجالات إبداعية</span></li>
+          </ul>
+        </div>
+        <figure class="about-photo reveal" style="margin:0">
+          <img src="images/portrait.jpg" alt="صورة محمد حمزة علاوي" loading="lazy" width="1280" height="720">
+          <figcaption>بلمسة سينمائية</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- الخدمات -->
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="title-row reveal"><h2>ماذا أقدّم</h2></div>
+        <div class="service-list">
+          <article class="service reveal">
+            <div><h3>مونتاج احترافي</h3><p>بروموهات وريلز وفيديوهات فعاليات، بإيقاع مدروس وانتقالات سينمائية.</p></div>
+          </article>
+          <article class="service reveal">
+            <div><h3>تصوير فوتوغرافي</h3><p>بورتريه وفعاليات ومحتوى للمنصات الرقمية بجودة عالية.</p></div>
+          </article>
+          <article class="service reveal">
+            <div><h3>تصحيح الألوان</h3><p>تلوين يعطي كل مشهد إحساسه ويوحّد هوية العمل البصرية.</p></div>
+          </article>
+          <article class="service reveal">
+            <div><h3>تغطية الفعاليات</h3><p>توثيق كامل للفعاليات الرسمية والثقافية من التصوير حتى النشر.</p></div>
+          </article>
+        </div>
+        <p class="tools reveal">أعمل على <strong>Adobe Premiere Pro</strong> للمونتاج وتصحيح الألوان.</p>
+      </div>
+    </section>
+
+    <!-- بعض أعمالي -->
+    <section class="works" id="works">
+      <div class="wrap">
+        <div class="title-row reveal"><h2>بعض أعمالي</h2></div>
+        <div class="filters" role="group" aria-label="تصنيف الأعمال">
+          <button class="filter" aria-pressed="true" data-filter="all">جميع الأعمال</button>
+          <button class="filter" aria-pressed="false" data-filter="photo">صور</button>
+          <button class="filter" aria-pressed="false" data-filter="promo">بروموهات</button>
+          <button class="filter" aria-pressed="false" data-filter="reel">ريلز</button>
+        </div>
+        <div class="gallery" id="gallery"></div>
+        <div class="gallery-links">
+          <a class="btn btn-solid" href="https://www.instagram.com/hamza_ellawi/reposts/" target="_blank" rel="noopener">المزيد على انستغرام</a>
+          <a class="btn btn-line" href="https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" target="_blank" rel="noopener">الأرشيف الكامل على Drive</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- الخبرات -->
+    <section class="experience" id="experience">
+      <div class="wrap">
+        <div class="title-row reveal"><h2>مسيرتي المهنية</h2></div>
+        <div class="jobs">
+          <article class="job reveal">
+            <div class="job-head">
+              <img src="images/identity.jpg" alt="شعار وزارة الثقافة السورية" loading="lazy">
+              <div><h3>المسؤول الإعلامي | إدارة الفعاليات</h3><span class="job-org">وزارة الثقافة السورية</span></div>
+            </div>
+            <p>أتولى إدارة وتغطية الفعاليات الثقافية الرسمية في مديرية إدارة الفعاليات، مع التركيز على الجودة السينمائية في التوثيق والمونتاج.</p>
+          </article>
+          <article class="job reveal">
+            <div class="job-head">
+              <img src="images/habib.jpg" alt="شعار مسجد حبيب بن زيد" loading="lazy">
+              <div><h3>المكتب الإعلامي</h3><span class="job-org">مسجد حبيب بن زيد</span></div>
+            </div>
+            <p>الإشراف على المحتوى المرئي للمنصات الرقمية الخاصة بالمسجد، وتقديم محتوى ديني واجتماعي بصورة فنية معاصرة.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- طرق التواصل -->
+    <section class="contact" id="contact">
+      <div class="wrap">
+        <div class="contact-intro reveal">
+          <h2>لنصنع إبداعاً <span>مرئياً</span></h2>
+          <p>سواء كنت تبحث عن مصور، مونتير، أو خبير ألوان.. أنا هنا لتحويل رؤيتك إلى حقيقة.</p>
+          <a class="btn btn-beige" href="https://wa.me/963996522320" target="_blank" rel="noopener">ابدأ المحادثة</a>
+        </div>
+        <ul class="contact-list reveal">
+          <li><a href="https://wa.me/963996522320" target="_blank" rel="noopener"><span class="k">واتساب</span><span class="v">+963 996 522 320</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
+          <li><a href="tel:+963996522320"><span class="k">الرقم</span><span class="v">0996 522 320</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
+          <li><a href="https://www.instagram.com/hamza_ellawi/" target="_blank" rel="noopener"><span class="k">انستغرام</span><span class="v">@hamza_ellawi</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
+          <li><a href="https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" target="_blank" rel="noopener"><span class="k">كل الأعمال</span><span class="v">Google Drive</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
+          <li id="email-row" hidden><a href="#" id="email-link"><span class="k">البريد</span><span class="v" id="email-text"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p style="margin:0">أُنشئ من قبل يزن كعكه جي · للتواصل <a href="tel:0992481591" dir="ltr">0992481591</a></p>
+      <div class="socials">
+        <a href="https://www.instagram.com/hamza_ellawi/" target="_blank" rel="noopener" aria-label="انستغرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/share/1JgaSqHfhg/" target="_blank" rel="noopener" aria-label="فيسبوك"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
+        <a href="https://x.com/Hamza78451058" target="_blank" rel="noopener" aria-label="إكس"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/963996522320" target="_blank" rel="noopener" aria-label="راسلني على واتساب">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zM12 0a12 12 0 0 0-10.3 18L0 24l6.2-1.6A12 12 0 1 0 12 0z"/></svg>
+    <span>راسلني</span>
+  </a>
+
+  <script>
+    /* =====================================================
+       الإعدادات: عدّل هون فقط لإضافة الأعمال والإيميل
+       ===================================================== */
+
+    // اكتب الإيميل هون ليظهر بطرق التواصل (إذا تركته فاضي ما بيظهر)
+    const EMAIL = "";
+
+    // الأعمال: type = "photo" أو "promo" أو "reel"
+    // image = صورة الغلاف، link = الرابط اللي بينفتح (انستغرام، يوتيوب، درايف...)
+    // أول عمل بيطلع كبير بالمعرض، فحط أقوى شغل أول شي
+    const WORKS = [
+      { type: "promo", title: "مونتاج بروموهات الفعاليات", image: "لقطة-مونتاج.jpg", link: "https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" },
+      { type: "reel",  title: "ريلز على انستغرام",          image: "sharing_my_premiere_pro_timeline_anyone_else_likes_to_keep_v0_lpic1lajgegc1.webp", link: "https://www.instagram.com/hamza_ellawi/reposts/" },
+      { type: "promo", title: "تصحيح ألوان وتلوين سينمائي",  image: "fast_rgb_three_way-780x380.webp", link: "https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" },
+      { type: "photo", title: "صور الفعاليات والبورتريه",    image: "images/portrait.jpg", link: "https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB" },
+      { type: "reel",  title: "مقاطع قصيرة للمنصات",         image: "professional-video-editing-time-line-260nw-1863644794.webp", link: "https://www.instagram.com/hamza_ellawi/reposts/" },
+    ];
+
+    const LABELS = { photo: "صورة", promo: "برومو", reel: "ريل" };
+
+    /* ===================================================== */
+
+    document.documentElement.classList.add("js");
+
+    if (EMAIL) {
+      document.getElementById("email-link").href = "mailto:" + EMAIL;
+      document.getElementById("email-text").textContent = EMAIL;
+      document.getElementById("email-row").hidden = false;
+    }
+
+    // القائمة على الموبايل
+    const nav = document.getElementById("nav");
+    const menuBtn = document.getElementById("menu-btn");
+    menuBtn.addEventListener("click", () => {
+      const open = nav.classList.toggle("open");
+      menuBtn.setAttribute("aria-expanded", open);
+    });
+    document.querySelectorAll("#nav-links a").forEach(a => a.addEventListener("click", () => {
+      nav.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }));
+
+    const waFloat = document.querySelector(".wa-float");
+    const onScroll = () => {
+      nav.classList.toggle("scrolled", scrollY > 10);
+      waFloat.classList.toggle("show", scrollY > innerHeight * 0.7);
+    };
+    addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    // المعرض: أول عمل كبير، التاني طويل، والباقي عادي
+    const gallery = document.getElementById("gallery");
+    function renderGallery(filter) {
+      gallery.innerHTML = "";
+      WORKS.filter(w => filter === "all" || w.type === filter).forEach((w, i) => {
+        const a = document.createElement("a");
+        a.className = "shot" + (i === 0 ? " feature" : i === 1 ? " tall" : "");
+        a.href = w.link; a.target = "_blank"; a.rel = "noopener";
+        a.innerHTML = `<img src="${w.image}" alt="${w.title}" loading="lazy">
+          <span class="shot-label"><small>${LABELS[w.type]}</small>${w.title}</span>`;
+        gallery.appendChild(a);
+      });
+    }
+    document.querySelectorAll(".filter").forEach(btn => btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter").forEach(b => b.setAttribute("aria-pressed", b === btn));
+      renderGallery(btn.dataset.filter);
+    }));
+    renderGallery("all");
+
+    // حركة الظهور
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }), { rootMargin: "0px 0px -40px 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
