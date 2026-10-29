@@ -90,7 +90,14 @@
     .menu-btn svg { width: 28px; height: 28px; }
 
     /* ===== Hero: الصورة على شاشة كاميرا ===== */
-    .hero { background: var(--cream); padding: 64px 0 0; text-align: center; overflow: hidden; }
+    .hero { position: relative; isolation: isolate; background: var(--cream); padding: 64px 0 0; text-align: center; overflow: hidden; }
+    /* النقشة الإسلامية: بتتحوّل لخطوط غامقة خفيفة فوق الكريمي */
+    .hero::before {
+      content: ""; position: absolute; inset: 0; z-index: -1;
+      background: url("images/pattern.jpg") center / 620px repeat;
+      filter: grayscale(1) brightness(3.3) contrast(3) invert(1);
+      mix-blend-mode: multiply; opacity: .07;
+    }
     .hero h1 { font-size: clamp(2.6rem, 7.5vw, 5rem); line-height: 1.15; margin: 0 0 10px; color: var(--burgundy-800); }
     .hero-tag { color: var(--muted); font-size: clamp(1.05rem, 2.4vw, 1.3rem); margin: 0 0 30px; }
     .hero-tag b { color: var(--burgundy-500); font-weight: 400; margin: 0 6px; }
@@ -195,7 +202,18 @@
     .job p { margin: 0; color: var(--muted); }
 
     /* ===== Contact: قائمة سطور ===== */
-    .contact { background: var(--burgundy-800); color: var(--white); }
+    .contact { position: relative; isolation: isolate; overflow: hidden; background: var(--burgundy-800); color: var(--white); }
+    /* النقشة بخطوط فاتحة، والنسر كعلامة مائية */
+    .contact::before, .contact::after { content: ""; position: absolute; z-index: -1; mix-blend-mode: screen; pointer-events: none; }
+    .contact::before {
+      inset: 0; background: url("images/pattern.jpg") center / 620px repeat;
+      filter: grayscale(1) brightness(3.3) contrast(3); opacity: .06;
+    }
+    .contact::after {
+      width: 560px; aspect-ratio: 1464 / 822; left: -90px; bottom: -40px;
+      background: url("images/identity.jpg") center / cover no-repeat;
+      filter: grayscale(1) contrast(1.6); opacity: .09;
+    }
     .contact .wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
     .contact h2 { color: var(--white); margin: 0 0 16px; }
     .contact h2 span { color: var(--beige); }
@@ -269,6 +287,7 @@
       .cam-brand { font-size: .62rem; letter-spacing: .2em; }
       .title-row { gap: 16px; margin-bottom: 36px; }
       .contact-list a { grid-template-columns: 96px 1fr 20px; }
+      .contact::after { width: 340px; left: -60px; bottom: -20px; }
       .wa-float span { display: none; }
       .wa-float { padding: 14px; border-radius: 50%; }
     }
