@@ -211,16 +211,11 @@
 
     /* ===== Contact: قائمة سطور ===== */
     .contact { position: relative; isolation: isolate; overflow: hidden; background: var(--burgundy-800); color: var(--white); }
-    /* النقشة بخطوط فاتحة، والنسر كعلامة مائية */
-    .contact::before, .contact::after { content: ""; position: absolute; z-index: -1; mix-blend-mode: screen; pointer-events: none; }
+    /* النقشة بخطوط فاتحة */
     .contact::before {
+      content: ""; position: absolute; z-index: -1; mix-blend-mode: screen; pointer-events: none;
       inset: 0; background: url("images/pattern.jpg") center / 620px repeat;
       filter: grayscale(1) brightness(3.3) contrast(3); opacity: .06;
-    }
-    .contact::after {
-      width: 560px; aspect-ratio: 1464 / 822; left: -90px; bottom: -40px;
-      background: url("images/identity.jpg") center / cover no-repeat;
-      filter: grayscale(1) contrast(1.6); opacity: .09;
     }
     .contact .wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: start; }
     .contact h2 { color: var(--white); margin: 0 0 16px; }
@@ -238,15 +233,11 @@
     .contact-list .ico { width: 40px; height: 40px; padding: 9px; border-radius: 50%; border: 1px solid rgba(241,217,166,.35); }
     .contact-list .arrow { width: 20px; height: 20px; }
 
-    footer { background: var(--burgundy-900); color: rgba(255,255,255,.55); padding: 36px 0; font-size: .9rem; }
-    footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 28px; }
-
-    /* مربع صانع الموقع */
-    .maker {
-      width: min(360px, 100%); background: #0A0A0A; border: 1px solid rgba(232,193,88,.2); border-radius: 14px;
-      padding: 28px 20px 22px; text-align: center; direction: rtl;
-    }
-    .maker-by { display: block; color: rgba(255,255,255,.6); font-size: .9rem; margin-bottom: 6px; }
+    /* الفوتر: قسم صانع الموقع بعرض الصفحة لآخرها */
+    footer { background: #0A0A0A; color: #9A9A9A; padding: 56px 0 40px; font-size: .9rem; text-align: center; }
+    .maker-by { display: block; color: rgba(255,255,255,.6); font-size: .95rem; margin-bottom: 8px; }
+    .maker-name { display: inline-block; transition: opacity .2s; }
+    .maker-name:hover { opacity: .8; }
     .maker-logo {
       direction: ltr; font-family: system-ui, "Segoe UI", sans-serif; font-weight: 900; font-size: 3.4rem; line-height: 1; letter-spacing: .02em;
       background: linear-gradient(90deg, #D4A82C, #F5DE96); -webkit-background-clip: text; background-clip: text; color: transparent;
@@ -260,10 +251,6 @@
     .maker-links a:hover { background: #2A2A2A; color: #F5DE96; }
     .maker-links svg { width: 22px; height: 22px; }
     .maker-copy { margin: 0; color: #9A9A9A; }
-    .socials { display: flex; gap: 18px; }
-    .socials a { color: rgba(255,255,255,.7); transition: color .2s; }
-    .socials a:hover { color: var(--beige); }
-    .socials svg { width: 22px; height: 22px; }
 
     .wa-float {
       position: fixed; bottom: 22px; left: 22px; z-index: 60; display: inline-flex; align-items: center; gap: 8px;
@@ -364,7 +351,6 @@
       .cam-btns i { width: 18px; height: 18px; }
       .cam-brand { font-size: .62rem; letter-spacing: .2em; }
       .title-row { gap: 16px; margin-bottom: 36px; }
-      .contact::after { width: 340px; left: -60px; bottom: -20px; }
       .wa-float span { display: none; }
       .wa-float { padding: 14px; border-radius: 50%; }
     }
@@ -529,17 +515,13 @@
 
   <footer>
     <div class="wrap">
-      <div class="socials" aria-label="حسابات حمزة">
-        <a href="https://www.instagram.com/hamza_ellawi/" target="_blank" rel="noopener" aria-label="انستغرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
-        <a href="https://www.facebook.com/share/1JgaSqHfhg/" target="_blank" rel="noopener" aria-label="فيسبوك"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
-        <a href="https://x.com/Hamza78451058" target="_blank" rel="noopener" aria-label="إكس"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.7L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L2 3h6.4l4.4 5.8L17.8 3zm-1.1 16.2h1.7L7.4 4.7H5.6l11.1 14.5z"/></svg></a>
-      </div>
-
       <!-- صانع الموقع -->
       <div class="maker">
-        <span class="maker-by">أُنشئ من قبل يزن كعكه جي</span>
-        <div class="maker-logo">YK10</div>
-        <div class="maker-sub">SOFTWARE</div>
+        <span class="maker-by">تطوير وبرمجة</span>
+        <a class="maker-name" href="https://yk10-software.netlify.app" target="_blank" rel="noopener" aria-label="YK10 Software">
+          <div class="maker-logo">YK10</div>
+          <div class="maker-sub">SOFTWARE</div>
+        </a>
         <div class="maker-links">
           <a href="https://wa.me/963992481591" target="_blank" rel="noopener" aria-label="واتساب YK10"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.3zM12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 1 1 12 21.8zM12 0a12 12 0 0 0-10.3 18L0 24l6.2-1.6A12 12 0 1 0 12 0z"/></svg></a>
           <a href="https://www.facebook.com/profile.php?id=61588726841257" target="_blank" rel="noopener" aria-label="فيسبوك YK10"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
@@ -661,12 +643,16 @@
       menuBtn.setAttribute("aria-expanded", "false");
     }));
 
+    // زر الواتساب العائم: بيبيّن بعد الواجهة، وبيختفي بقسم التواصل والفوتر لأنو الواتساب موجود هناك
     const waFloat = document.querySelector(".wa-float");
+    const contactSection = document.getElementById("contact");
     const onScroll = () => {
       nav.classList.toggle("scrolled", scrollY > 10);
-      waFloat.classList.toggle("show", scrollY > innerHeight * 0.7);
+      const inContact = contactSection.getBoundingClientRect().top < innerHeight * 0.65;
+      waFloat.classList.toggle("show", scrollY > innerHeight * 0.7 && !inContact);
     };
     addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
     onScroll();
 
     // مشغّل الفيديو: بيشغّل فيديو الدرايف جوا الموقع، والعمودي (ريلز) بيطلع طولي
