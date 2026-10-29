@@ -90,7 +90,7 @@
     .menu-btn svg { width: 28px; height: 28px; }
 
     /* ===== Hero: الصورة على شاشة كاميرا ===== */
-    .hero { position: relative; isolation: isolate; background: var(--burgundy-900); color: var(--white); padding: 64px 0 0; text-align: center; overflow: hidden; }
+    .hero { position: relative; isolation: isolate; background: var(--burgundy-900); color: var(--white); padding: 64px 0 76px; text-align: center; overflow: hidden; }
     /* خلفية لقطة المونتاج، ملوّنة بالخمري مع تدرّج */
     .hero::before, .hero::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
     .hero::before {
@@ -112,46 +112,63 @@
     .hero .btn-solid:active, .hero .btn-line:active { background: var(--beige); color: var(--burgundy-900); }
     .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
 
+    /* ظهر الكاميرا: كل القياسات بالـ em، فبتصغر كلها سوا حسب عرض الشاشة */
     .camera {
-      direction: ltr; position: relative; width: min(620px, 100%); margin: 0 auto;
-      background: linear-gradient(170deg, var(--burgundy-700), var(--burgundy-900));
-      border-radius: 30px 30px 0 0; padding: 26px 150px 0 26px;
-      box-shadow: 0 -10px 60px -20px rgba(74,13,23,.5);
+      direction: ltr; position: relative; width: 62em; margin: 3.6em auto 0;
+      font-size: min(10px, calc((100vw - 32px) / 62));
+      background: linear-gradient(165deg, var(--burgundy-700), var(--burgundy-900) 80%);
+      border-radius: 2.6em; padding: 2.4em 15em 2.4em 2.4em;
+      box-shadow: inset 0 0 0 .15em rgba(241,217,166,.16), inset 0 .3em 0 rgba(255,255,255,.06), 0 2.4em 5em -1.6em rgba(0,0,0,.65);
     }
-    /* عين الكاميرا والزر العلوي */
+    /* عين الكاميرا فوق الشاشة، وزر التصوير البيج */
     .camera::before {
-      content: ""; position: absolute; top: -34px; left: 34%; width: 130px; height: 38px;
-      background: var(--burgundy-700); border-radius: 14px 14px 0 0;
+      content: ""; position: absolute; top: -3.2em; left: 17em; width: 15em; height: 3.6em;
+      background: linear-gradient(180deg, var(--burgundy-500), var(--burgundy-700));
+      border-radius: 1.4em 1.4em 0 0; box-shadow: inset 0 .15em 0 rgba(255,255,255,.08);
     }
     .camera::after {
-      content: ""; position: absolute; top: -16px; right: 46px; width: 54px; height: 18px;
-      background: var(--burgundy-900); border-radius: 8px 8px 0 0;
+      content: ""; position: absolute; top: -1.5em; right: 4.4em; width: 5.6em; height: 1.8em;
+      background: var(--beige); border-radius: .9em .9em 0 0;
     }
     .camera-screen {
-      position: relative; border-radius: 10px 10px 0 0; overflow: hidden; background: #000;
-      border: 8px solid #1B0307; border-bottom: 0; aspect-ratio: 4/3;
+      position: relative; border-radius: 1em; overflow: hidden; background: #000;
+      border: .7em solid #160206; aspect-ratio: 3 / 2;
     }
-    .camera-screen img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+    .camera-screen::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(130deg, rgba(255,255,255,.1), transparent 35%);
+    }
+    .camera-screen img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 30%; }
     .camera-controls {
-      position: absolute; top: 34px; right: 26px; width: 100px; display: flex; flex-direction: column; align-items: center; gap: 22px;
+      position: absolute; top: 2.4em; bottom: 2.4em; right: 2.2em; width: 10.6em;
+      display: flex; flex-direction: column; align-items: center; justify-content: space-between;
     }
     .cam-dial {
-      width: 74px; height: 74px; border-radius: 50%; background: var(--burgundy-900);
-      border: 3px solid rgba(241,217,166,.55); position: relative;
+      width: 7.2em; height: 7.2em; border-radius: 50%; position: relative;
+      background: repeating-conic-gradient(var(--burgundy-900) 0 6deg, #3a0811 6deg 12deg);
+      box-shadow: 0 0 0 .25em rgba(241,217,166,.45);
     }
-    .cam-dial::before, .cam-dial::after { content: ""; position: absolute; background: rgba(241,217,166,.55); border-radius: 2px; }
-    .cam-dial::before { width: 3px; height: 16px; top: 6px; left: 50%; transform: translateX(-50%); }
-    .cam-dial::after { width: 22px; height: 22px; border-radius: 50%; inset: 0; margin: auto; background: var(--burgundy-700); border: 2px solid rgba(241,217,166,.35); }
-    .cam-btns { display: grid; grid-template-columns: repeat(2, 26px); gap: 12px; }
-    .cam-btns i { width: 26px; height: 26px; border-radius: 50%; background: var(--burgundy-900); box-shadow: inset 0 0 0 2px rgba(241,217,166,.3); }
-    .cam-brand { color: rgba(241,217,166,.75); font-size: .8rem; letter-spacing: .3em; font-weight: 700; }
+    .cam-dial::after {
+      content: ""; position: absolute; inset: 1.4em; border-radius: 50%;
+      background: var(--burgundy-700); box-shadow: inset 0 0 0 .15em rgba(241,217,166,.3);
+    }
+    .cam-pad {
+      width: 6.6em; height: 6.6em; border-radius: 50%; position: relative;
+      background: var(--burgundy-900); box-shadow: inset 0 0 0 .2em rgba(241,217,166,.3);
+    }
+    .cam-pad::after {
+      content: ""; position: absolute; inset: 2.1em; border-radius: 50%; background: var(--beige); opacity: .8;
+    }
+    .cam-btns { display: flex; gap: 1.2em; }
+    .cam-btns i { width: 2.4em; height: 2.4em; border-radius: 50%; background: var(--burgundy-900); box-shadow: inset 0 0 0 .18em rgba(241,217,166,.3); }
+    .cam-brand { color: rgba(241,217,166,.8); font-size: 1.15em; letter-spacing: .35em; font-weight: 700; padding-left: .35em; }
 
     /* ===== About ===== */
     .about .wrap { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center; }
     .about-text p { color: var(--muted); font-size: 1.08rem; margin: 0 0 16px; }
     .about-text .title-row { margin-bottom: 28px; }
     .about-photo { position: relative; }
-    .about-photo img { border-radius: var(--radius); aspect-ratio: 4/5; object-fit: cover; object-position: center 35%; width: 100%; }
+    .about-photo img { border-radius: var(--radius); aspect-ratio: 4 / 3; object-fit: cover; object-position: center 35%; width: 100%; height: auto; }
 
     /* ===== Services: قائمة مرقّمة ===== */
     .works { background: var(--cream); }
@@ -337,19 +354,9 @@
         background: var(--white); padding: 4px 16px 16px; border-bottom: 1px solid var(--line);
       }
       .nav.open .nav-links a { display: block; padding: 12px 4px; font-size: 1.05rem; border-bottom: 1px solid var(--line); }
-      .hero { padding-top: 44px; }
+      .hero { padding: 44px 0 52px; }
       .hero-actions { margin-bottom: 52px; }
-      .camera { padding: 16px 84px 0 16px; border-radius: 22px 22px 0 0; }
-      .camera::before { width: 80px; height: 26px; top: -24px; }
-      .camera::after { right: 24px; width: 36px; }
-      .camera-screen { border-width: 5px; }
-      .camera-controls { right: 12px; top: 22px; width: 60px; gap: 14px; }
-      .cam-dial { width: 46px; height: 46px; }
-      .cam-dial::before { height: 10px; top: 4px; }
-      .cam-dial::after { width: 14px; height: 14px; }
-      .cam-btns { grid-template-columns: repeat(2, 18px); gap: 8px; }
-      .cam-btns i { width: 18px; height: 18px; }
-      .cam-brand { font-size: .62rem; letter-spacing: .2em; }
+      .camera { font-size: calc((100vw - 56px) / 62); }
       .title-row { gap: 16px; margin-bottom: 36px; }
       .wa-float span { display: none; }
       .wa-float { padding: 14px; border-radius: 50%; }
@@ -394,11 +401,12 @@
         </div>
         <div class="camera">
           <div class="camera-screen">
-            <img src="images/portrait.jpg" alt="محمد حمزة علاوي" width="1280" height="720">
+            <img src="images/camera.webp" alt="محمد حمزة علاوي" width="1600" height="900">
           </div>
           <div class="camera-controls" aria-hidden="true">
             <span class="cam-dial"></span>
-            <span class="cam-btns"><i></i><i></i><i></i><i></i></span>
+            <span class="cam-pad"></span>
+            <span class="cam-btns"><i></i><i></i></span>
             <span class="cam-brand">HAMZA</span>
           </div>
         </div>
