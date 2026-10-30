@@ -399,6 +399,71 @@
     .player-drive { display: inline-block; margin-top: 10px; color: rgba(255,255,255,.7); font-size: .9rem; border-bottom: 1px solid rgba(241,217,166,.4); }
     .player-drive:hover { color: var(--beige); }
 
+    /* ===== 1. الافتتاحية: غالق كاميرا بينفتح ===== */
+    @property --hole { syntax: "<length>"; inherits: false; initial-value: 0px; }
+    .intro {
+      position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; background: var(--burgundy-900);
+      --hole: 0px;
+      -webkit-mask: radial-gradient(circle at 50% 50%, transparent var(--hole), #000 calc(var(--hole) + 1px));
+      mask: radial-gradient(circle at 50% 50%, transparent var(--hole), #000 calc(var(--hole) + 1px));
+      animation: intro-open .85s cubic-bezier(.75, 0, .25, 1) .55s forwards;
+    }
+    @keyframes intro-open { to { --hole: 150vmax; } }
+    .intro-mark { display: grid; justify-items: center; gap: 14px; color: var(--beige); animation: intro-mark 1.3s ease forwards; }
+    .intro-mark svg { width: 110px; height: 110px; animation: intro-iris 1.3s cubic-bezier(.6, 0, .3, 1) forwards; }
+    .intro-mark span { font-weight: 700; font-size: 1.1rem; letter-spacing: .02em; }
+    @keyframes intro-iris { from { transform: rotate(-120deg) scale(.7); } to { transform: rotate(60deg) scale(1.15); } }
+    @keyframes intro-mark { 0% { opacity: 0; } 25%, 55% { opacity: 1; } 100% { opacity: 0; } }
+
+    /* ===== 2. تايملاين المونتاج: شريط التقدّم تحت القائمة ===== */
+    .timeline {
+      position: absolute; inset-inline: 0; top: 100%; height: 8px; display: flex; gap: 2px; padding: 0 2px;
+      background: var(--burgundy-900); transition: height .25s ease; direction: rtl;
+    }
+    .timeline:hover { height: 24px; }
+    .clip {
+      position: relative; height: 100%; border: 0; padding: 0; cursor: pointer; overflow: hidden; border-radius: 2px;
+      background: rgba(241,217,166,.22); font: inherit; color: var(--burgundy-900);
+    }
+    .clip::before {
+      content: ""; position: absolute; inset-block: 0; right: 0; width: var(--fill, 0%);
+      background: var(--clip-color, var(--beige)); transition: width .1s linear;
+    }
+    .clip:nth-child(even) { --clip-color: #E8A0AE; }
+    .clip span {
+      position: relative; display: block; font-size: .72rem; font-weight: 700; line-height: 24px; white-space: nowrap;
+      opacity: 0; transition: opacity .2s; text-align: center;
+    }
+    .timeline:hover .clip span { opacity: 1; }
+    .playhead {
+      position: absolute; top: -3px; bottom: -3px; width: 2px; background: #FF4D5E; pointer-events: none;
+      right: var(--progress, 0%); transform: translateX(50%); box-shadow: 0 0 6px rgba(255,77,94,.7);
+    }
+    .playhead::before {
+      content: ""; position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+      border: 5px solid transparent; border-top: 6px solid #FF4D5E; border-bottom: 0;
+    }
+
+    /* ===== 3. حركة موشن للاسم، وسطر الأدوار المتبدّل ===== */
+    .hero h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .12em; margin-bottom: -.12em; }
+    .hero h1 .w > span { display: inline-block; }
+    .js .hero h1 .w > span {
+      transform: translateY(110%) skewY(6deg);
+      animation: word-in .8s cubic-bezier(.2, .9, .2, 1) forwards;
+      animation-delay: calc(var(--base, .15s) + var(--i) * .13s);
+    }
+    .intro-on .hero h1 .w > span { --base: 1.05s; }
+    @keyframes word-in { to { transform: none; } }
+    .hero h1::after {
+      content: ""; display: block; height: 3px; width: 0; margin: 8px auto 0; background: var(--beige); border-radius: 2px;
+      animation: underline-in .7s ease forwards; animation-delay: calc(var(--base, .15s) + .5s);
+    }
+    .intro-on .hero h1::after { --base: 1.05s; }
+    @keyframes underline-in { to { width: 90px; } }
+    .role { display: inline-block; color: var(--beige); font-weight: 700; transition: transform .35s ease, opacity .35s ease; }
+    .role.out { transform: translateY(-60%); opacity: 0; }
+    .role.in { transform: translateY(60%); opacity: 0; transition: none; }
+
     /* حركة ظهور خفيفة، والمحتوى ظاهر حتى لو ما اشتغل الجافاسكربت */
     .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .5s ease, transform .5s ease; }
     .js .reveal.in { opacity: 1; transform: none; }
@@ -446,6 +511,24 @@
   </style>
 </head>
 <body>
+  <script>
+    // بيشتغل قبل ما ترسم الصفحة: افتتاحية الغالق (مرة وحدة بكل زيارة)
+    document.documentElement.classList.add("js");
+    (function () {
+      var seen = false;
+      try { seen = sessionStorage.getItem("introSeen") === "1"; sessionStorage.setItem("introSeen", "1"); } catch (e) {}
+      if (seen || matchMedia("(prefers-reduced-motion: reduce)").matches || !("registerProperty" in CSS)) return;
+      document.documentElement.classList.add("intro-on");
+      var el = document.createElement("div");
+      el.className = "intro"; el.setAttribute("aria-hidden", "true");
+      el.innerHTML = '<div class="intro-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M14.3 8l5.7 10M9.7 8h11.5M7.4 12l5.7-10M9.7 16L4 6M14.3 16H2.8M16.6 12l-5.7 10"/></svg><span>محمد حمزة علاوي</span></div>';
+      document.body.appendChild(el);
+      var done = function () { el.remove(); };
+      el.addEventListener("animationend", function (e) { if (e.target === el) done(); });
+      el.addEventListener("click", done);
+      setTimeout(done, 2600);
+    })();
+  </script>
 
   <header class="nav" id="nav">
     <div class="wrap">
@@ -465,14 +548,16 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
+    <!-- تايملاين المونتاج: كل مقطع قسم من الموقع، والمؤشر الأحمر بيمشي مع السكرول -->
+    <nav class="timeline" id="timeline" aria-label="تقدّم الصفحة"><span class="playhead" id="playhead"></span></nav>
   </header>
 
   <main>
     <!-- الواجهة: الصورة معروضة على شاشة كاميرا -->
     <section class="hero" id="hero">
       <div class="wrap">
-        <h1>محمد حمزة علاوي</h1>
-        <p class="hero-tag">مونتاج احترافي <b>·</b> تصوير فوتوغرافي <b>·</b> موشن غرافيك <b>·</b> طيّار درون</p>
+        <h1><span class="w"><span style="--i:0">محمد</span></span> <span class="w"><span style="--i:1">حمزة</span></span> <span class="w"><span style="--i:2">علاوي</span></span></h1>
+        <p class="hero-tag">صانع محتوى مرئي <b>·</b> <span class="role" id="role">مونتير</span></p>
         <div class="hero-actions">
           <a href="#works" class="btn btn-solid">تصفّح المعرض</a>
           <a href="https://wa.me/963996522320" target="_blank" rel="noopener" class="btn btn-line">اطلب خدمة</a>
@@ -773,6 +858,59 @@
     addEventListener("scroll", onScroll, { passive: true });
     addEventListener("resize", onScroll);
     onScroll();
+
+    // سطر الأدوار تحت الاسم: بيتبدّل كل شوي بحركة لفوق
+    const ROLES = ["مونتير", "مصوّر فوتوغرافي", "طيّار درون", "مصمّم موشن غرافيك"];
+    const roleEl = document.getElementById("role");
+    let roleIndex = 0;
+    setInterval(() => {
+      roleEl.classList.add("out");
+      setTimeout(() => {
+        roleIndex = (roleIndex + 1) % ROLES.length;
+        roleEl.textContent = ROLES[roleIndex];
+        roleEl.classList.remove("out"); roleEl.classList.add("in");
+        void roleEl.offsetWidth; roleEl.classList.remove("in");
+      }, 350);
+    }, 2600);
+
+    // تايملاين المونتاج: مقطع لكل قسم بطوله الحقيقي، وبيتعبّى مع السكرول
+    const timeline = document.getElementById("timeline");
+    const playhead = document.getElementById("playhead");
+    const CLIP_NAMES = { hero: "الواجهة", about: "من أنا", works: "بعض أعمالي", skills: "المهارات", experience: "الخبرات", contact: "التواصل" };
+    const clipSections = Object.keys(CLIP_NAMES).map(id => document.getElementById(id));
+    const clips = clipSections.map(sec => {
+      const b = document.createElement("button");
+      b.className = "clip"; b.type = "button"; b.title = CLIP_NAMES[sec.id];
+      b.innerHTML = `<span>${CLIP_NAMES[sec.id]}</span>`;
+      b.addEventListener("click", () => sec.scrollIntoView({ behavior: reduceMotionPref() ? "auto" : "smooth" }));
+      timeline.insertBefore(b, playhead);
+      return b;
+    });
+    function reduceMotionPref() { return matchMedia("(prefers-reduced-motion: reduce)").matches; }
+    function layoutTimeline() {
+      clipSections.forEach((sec, i) => { clips[i].style.flex = `${sec.offsetHeight} 1 0`; });
+      updateTimeline();
+    }
+    function updateTimeline() {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const p = max > 0 ? Math.min(1, scrollY / max) : 0;
+      // نقطة القراءة بتنزل من أول الشاشة لآخرها مع السكرول، فبتوصل لآخر قسم بآخر الصفحة
+      const y = scrollY + p * innerHeight;
+      const start = clipSections[0].offsetTop;
+      const last = clipSections[clipSections.length - 1];
+      const span = last.offsetTop + last.offsetHeight - start;
+      const pos = Math.max(0, Math.min(1, (y - start) / span));
+      playhead.style.setProperty("--progress", (pos * 100).toFixed(2) + "%");
+      // كل مقطع بيتعبّى حسب قدّيش الزائر قطع منه
+      clipSections.forEach((sec, i) => {
+        const f = Math.max(0, Math.min(1, (y - sec.offsetTop) / sec.offsetHeight));
+        clips[i].style.setProperty("--fill", (f * 100).toFixed(1) + "%");
+      });
+    }
+    addEventListener("scroll", updateTimeline, { passive: true });
+    addEventListener("resize", layoutTimeline);
+    addEventListener("load", layoutTimeline);
+    layoutTimeline();
 
     // الشريطين المتحركين بقسم المهارات: الكلمات بتتكرر لتعبّي العرض، والنسخة التانية بتخلّي الحركة بلا قطع
     const RIBBON_WORDS = ["مونتاج", "تصوير فوتوغرافي", "تصوير بالدرون", "موشن غرافيك", "تغطية فعاليات", "برومو", "ريلز"];
