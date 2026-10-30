@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>داش بورد | موقع حمزة علاوي</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%234A0D17'/%3E%3Cpath d='M20 44V24l12-6 12 6v20' fill='none' stroke='%23F1D9A6' stroke-width='4'/%3E%3C/svg%3E">
+  <style>
+    @font-face { font-family: "Qomra"; src: url("itfQomraArabic-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Qomra"; src: url("itfQomraArabic-Bold.otf") format("opentype"); font-weight: 700; font-display: swap; }
+    :root {
+      --burgundy-900: #2E070E; --burgundy-800: #4A0D17; --burgundy-700: #6B1424; --burgundy-500: #9B2C40;
+      --beige: #F1D9A6; --cream: #FBF5EA; --white: #fff; --ink: #2A1A1D; --muted: #6E5A5E; --line: #EADFD2;
+      --ok: #2E7D4F; --err: #B3261E; --r: 10px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Qomra", "Tajawal", system-ui, sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; }
+    button, input, select { font: inherit; }
+    .wrap { width: min(1100px, 100% - 32px); margin-inline: auto; }
+    [hidden] { display: none !important; }
+
+    header { background: var(--burgundy-800); color: var(--white); position: sticky; top: 0; z-index: 10; }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 64px; flex-wrap: wrap; padding: 8px 0; }
+    header h1 { margin: 0; font-size: 1.15rem; }
+    header h1 a { color: var(--beige); font-weight: 400; font-size: .9rem; margin-inline-start: 8px; }
+    .head-actions { display: flex; gap: 8px; align-items: center; }
+
+    .btn { border: 2px solid transparent; border-radius: 8px; padding: 9px 18px; font-weight: 700; cursor: pointer; transition: background .2s, opacity .2s; }
+    .btn:disabled { opacity: .45; cursor: not-allowed; }
+    .btn-main { background: var(--beige); color: var(--burgundy-900); }
+    .btn-main:not(:disabled):hover { background: var(--white); }
+    .btn-ghost { background: transparent; color: var(--beige); border-color: rgba(241,217,166,.5); }
+    .btn-dark { background: var(--burgundy-800); color: var(--beige); }
+    .btn-dark:hover { background: var(--burgundy-700); }
+    .btn-line { background: var(--white); color: var(--burgundy-800); border-color: var(--line); }
+    .btn-line:hover { border-color: var(--burgundy-500); }
+    .icon-btn { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); background: var(--white); cursor: pointer; display: grid; place-items: center; color: var(--burgundy-800); }
+    .icon-btn:hover { border-color: var(--burgundy-500); }
+    .icon-btn.danger:hover { background: #FBE9E7; border-color: var(--err); color: var(--err); }
+    .icon-btn:disabled { opacity: .3; cursor: default; }
+    .icon-btn svg { width: 16px; height: 16px; }
+
+    main { padding: 28px 0 80px; }
+    .card { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+
+    /* تسجيل الدخول */
+    .login { max-width: 520px; margin: 40px auto; }
+    .login h2 { margin: 0 0 6px; color: var(--burgundy-800); }
+    .login p { color: var(--muted); margin: 0 0 18px; }
+    .login ol { color: var(--muted); padding-inline-start: 20px; margin: 0 0 18px; font-size: .95rem; }
+    .login ol a { color: var(--burgundy-500); }
+    label.field { display: grid; gap: 6px; font-weight: 700; color: var(--burgundy-800); margin-bottom: 14px; font-size: .95rem; }
+    label.field small { font-weight: 400; color: var(--muted); }
+    input[type=text], input[type=password], input[type=url], select {
+      width: 100%; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 8px; background: var(--cream); color: var(--ink);
+    }
+    input:focus, select:focus { outline: none; border-color: var(--burgundy-500); background: var(--white); }
+    .ltr { direction: ltr; text-align: left; }
+
+    /* التبويبات */
+    .tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .tab { padding: 10px 22px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--white); color: var(--burgundy-800); font-weight: 700; cursor: pointer; }
+    .tab[aria-selected=true] { background: var(--burgundy-800); color: var(--beige); border-color: var(--burgundy-800); }
+    .cats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+    .cat { padding: 6px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--white); cursor: pointer; color: var(--muted); }
+    .cat b { font-weight: 400; opacity: .7; margin-inline-start: 4px; }
+    .cat[aria-pressed=true] { background: var(--beige); color: var(--burgundy-900); border-color: var(--beige); font-weight: 700; }
+
+    .hint { color: var(--muted); font-size: .92rem; margin: 0 0 16px; }
+
+    /* قائمة الأعمال */
+    .items { display: grid; gap: 10px; margin-bottom: 22px; }
+    .item { display: grid; grid-template-columns: 112px 1fr auto; gap: 14px; align-items: center; padding: 10px; border: 1px solid var(--line); border-radius: var(--r); background: var(--white); }
+    .item.pending { border-color: var(--beige); background: #FFFCF5; }
+    .thumb { width: 112px; aspect-ratio: 16/10; border-radius: 6px; object-fit: cover; background: var(--burgundy-900); display: block; }
+    .item-fields { display: grid; gap: 6px; min-width: 0; }
+    .item-fields input { padding: 7px 10px; font-size: .92rem; }
+    .item-actions { display: flex; gap: 6px; }
+    .badge { display: inline-block; font-size: .75rem; background: var(--beige); color: var(--burgundy-900); padding: 1px 8px; border-radius: 4px; }
+    .empty { text-align: center; color: var(--muted); padding: 28px; border: 2px dashed var(--line); border-radius: var(--r); }
+
+    .add { border-top: 1px solid var(--line); padding-top: 20px; }
+    .add h3 { margin: 0 0 12px; color: var(--burgundy-800); font-size: 1.05rem; }
+    .add-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .file-pick { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
+    .file-pick input { display: none; }
+
+    /* صور الكاميرا */
+    .cams { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; margin-bottom: 22px; }
+    .cam { border: 1px solid var(--line); border-radius: var(--r); background: var(--white); overflow: hidden; }
+    .cam.pending { border-color: var(--beige); }
+    .cam-preview { position: relative; aspect-ratio: 3/2; cursor: crosshair; background: #000; }
+    .cam-preview img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .cam-num { position: absolute; top: 8px; right: 8px; background: var(--burgundy-800); color: var(--beige); border-radius: 6px; padding: 0 8px; font-weight: 700; font-size: .85rem; }
+    .cam-bar { display: flex; justify-content: space-between; align-items: center; padding: 8px 10px; gap: 6px; }
+    .cam-bar small { color: var(--muted); font-size: .8rem; }
+
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--burgundy-900); color: var(--white); padding: 12px 20px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,.3); z-index: 50; max-width: calc(100% - 32px); }
+    .toast.ok { background: var(--ok); }
+    .toast.err { background: var(--err); }
+    .saving { opacity: .6; pointer-events: none; }
+
+    @media (max-width: 640px) {
+      .item { grid-template-columns: 84px 1fr; }
+      .thumb { width: 84px; }
+      .item-actions { grid-column: 1 / -1; justify-content: flex-end; }
+      .add-grid { grid-template-columns: 1fr; }
+      header h1 a { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>داش بورد الموقع <a href="./" target="_blank" rel="noopener">فتح الموقع ↗</a></h1>
+      <div class="head-actions" id="head-actions" hidden>
+        <button class="btn btn-main" id="save" disabled>حفظ ونشر</button>
+        <button class="btn btn-ghost" id="logout">خروج</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- تسجيل الدخول -->
+    <section class="card login" id="login" hidden>
+      <h2>أهلاً 👋</h2>
+      <p>الصق توكن غيت هاب لتقدر تعدّل الأعمال وصور الكاميرا. التوكن بينحفظ بهالمتصفح بس.</p>
+      <ol>
+        <li>افتح <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">صفحة التوكن الجديد على غيت هاب</a>.</li>
+        <li><b>Repository access</b> ← Only select repositories ← <b>hamza-ellawi</b>.</li>
+        <li><b>Permissions</b> ← <b>Contents</b> ← Read and write.</li>
+        <li>اكبس Generate token، انسخه، والصقه هون.</li>
+      </ol>
+      <form id="login-form">
+        <label class="field">التوكن
+          <input type="password" id="token" class="ltr" autocomplete="off" required placeholder="github_pat_...">
+        </label>
+        <button class="btn btn-dark" type="submit">دخول</button>
+      </form>
+    </section>
+
+    <!-- المحرر -->
+    <section id="editor" hidden>
+      <div class="tabs" role="tablist">
+        <button class="tab" role="tab" aria-selected="true" data-tab="works">الأعمال</button>
+        <button class="tab" role="tab" aria-selected="false" data-tab="camera">صور الكاميرا</button>
+      </div>
+
+      <div class="card" id="tab-works">
+        <div class="cats" id="cats"></div>
+        <p class="hint">أول عمل بكل تصنيف بيطلع كبير بالموقع. رتّب بالأسهم، وعدّل العنوان مباشرة.</p>
+        <div class="items" id="items"></div>
+
+        <div class="add" id="add-video">
+          <h3>ضيف فيديو</h3>
+          <div class="add-grid">
+            <label class="field">رابط الفيديو على Google Drive
+              <input type="url" id="new-link" class="ltr" placeholder="https://drive.google.com/file/d/.../view">
+            </label>
+            <label class="field">العنوان
+              <input type="text" id="new-title" placeholder="مثلاً: برومو معرض الكتاب">
+            </label>
+          </div>
+          <p class="hint">الغلاف بيتاخد لحاله من الدرايف. إذا بدك غلاف خاص اختار صورة:
+            <label class="file-pick btn btn-line"><input type="file" id="new-cover" accept="image/*"><span id="new-cover-name">اختار غلاف (اختياري)</span></label>
+          </p>
+          <p class="hint">تأكّد إنو الفيديو على الدرايف مشارك «لأي شخص معه الرابط»، وإلا ما رح يشتغل بالموقع.</p>
+          <button class="btn btn-dark" id="add-video-btn">+ ضيف الفيديو</button>
+        </div>
+
+        <div class="add" id="add-photo" hidden>
+          <h3>ضيف صور</h3>
+          <p class="hint">فيك تختار أكتر من صورة سوا. بتتصغّر لحالها قبل الرفع.</p>
+          <label class="file-pick btn btn-dark"><input type="file" id="new-photos" accept="image/*" multiple>+ اختار صور</label>
+        </div>
+      </div>
+
+      <div class="card" id="tab-camera" hidden>
+        <p class="hint">هي الصور اللي بتتبدّل على شاشة الكاميرا بالواجهة. الأولى بتطلع أول ما يفتح الموقع.
+          <b>اكبس على أي صورة لتختار وين يتركّز القص</b> (مثلاً على الوجه).</p>
+        <div class="cams" id="cams"></div>
+        <label class="file-pick btn btn-dark"><input type="file" id="new-cams" accept="image/*" multiple>+ ضيف صور للكاميرا</label>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" hidden></div>
+
+  <script>
+    const OWNER = "yazankakaje192-tech", REPO = "hamza-ellawi", BRANCH = "main", CONTENT = "content.json";
+    const API = `https://api.github.com/repos/${OWNER}/${REPO}`;
+    const CATS = [["promo", "برومو"], ["reel", "ريلز"], ["photo", "صور"], ["video", "فيديو"], ["drone", "درون"], ["motion", "موشن غرافيك"]];
+    const TOKEN_KEY = "hamzaDashToken";
+
+    const $ = id => document.getElementById(id);
+    let token = "", data = null, dirty = false, currentCat = "promo";
+    const pending = new Map();   // مسار الملف ← { base64, url } للصور اللي لسا ما انرفعت
+
+    /* ---------- أدوات ---------- */
+    function toast(msg, kind = "", ms = 3500) {
+      const t = $("toast"); t.textContent = msg; t.className = "toast " + kind; t.hidden = false;
+      clearTimeout(toast.timer); if (ms) toast.timer = setTimeout(() => t.hidden = true, ms);
+    }
+    function setDirty(v = true) { dirty = v; $("save").disabled = !v; }
+    function store(get, val) {
+      try { if (get) return localStorage.getItem(TOKEN_KEY) || ""; val ? localStorage.setItem(TOKEN_KEY, val) : localStorage.removeItem(TOKEN_KEY); } catch (e) { return ""; }
+    }
+    async function gh(path, opts = {}) {
+      const res = await fetch(API + path, { ...opts, headers: { Authorization: `Bearer ${token}`, Accept: "application/vnd.github+json", ...(opts.body ? { "Content-Type": "application/json" } : {}) } });
+      if (!res.ok) { const e = new Error(`GitHub ${res.status}`); e.status = res.status; throw e; }
+      return res.status === 204 ? null : res.json();
+    }
+    const b64ToText = b64 => new TextDecoder().decode(Uint8Array.from(atob(b64.replace(/\n/g, "")), c => c.charCodeAt(0)));
+    const preview = path => pending.get(path)?.url || (/^https?:/.test(path) ? path : path);
+    function driveId(url) { const m = url.match(/\/d\/([\w-]{20,})/) || url.match(/[?&]id=([\w-]{20,})/); return m && m[1]; }
+    const icon = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+    const ICON_UP = icon('<path d="M12 19V5M5 12l7-7 7 7"/>'), ICON_DOWN = icon('<path d="M12 5v14M19 12l-7 7-7-7"/>');
+    const ICON_DEL = icon('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/>');
+
+    // تصغير الصورة وتحويلها لـ WebP قبل الرفع
+    async function shrink(file, maxSide) {
+      const bmp = await createImageBitmap(file);
+      const s = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
+      const c = document.createElement("canvas"); c.width = Math.round(bmp.width * s); c.height = Math.round(bmp.height * s);
+      c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+      const blob = await new Promise(r => c.toBlob(r, "image/webp", .82));
+      const base64 = await new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result.split(",")[1]); fr.readAsDataURL(blob); });
+      return { base64, url: URL.createObjectURL(blob) };
+    }
+    const newPath = (dir, prefix) => `images/${dir}/${prefix}-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}.webp`;
+
+    /* ---------- الدخول ---------- */
+    async function login(t) {
+      token = t;
+      try {
+        await gh("");
+        const file = await gh(`/contents/${CONTENT}?ref=${BRANCH}`);
+        data = JSON.parse(b64ToText(file.content));
+        data.works = data.works || []; data.camera = data.camera || [];
+        store(false, t);
+        $("login").hidden = true; $("editor").hidden = false; $("head-actions").hidden = false;
+        renderAll();
+      } catch (e) {
+        store(false, "");
+        $("login").hidden = false;
+        toast(e.status === 401 ? "التوكن غلط أو منتهي" : e.status === 404 ? "التوكن ما إلو صلاحية على مستودع hamza-ellawi" : "ما قدرت اتصل بغيت هاب، جرّب كمان مرة", "err", 6000);
+      }
+    }
+    $("login-form").addEventListener("submit", e => { e.preventDefault(); login($("token").value.trim()); });
+    $("logout").addEventListener("click", () => {
+      if (dirty && !confirm("في تعديلات ما انحفظت. أكيد بدك تطلع؟")) return;
+      store(false, ""); location.reload();
+    });
+    addEventListener("beforeunload", e => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+
+    /* ---------- التبويبات ---------- */
+    document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t === tab));
+      $("tab-works").hidden = tab.dataset.tab !== "works";
+      $("tab-camera").hidden = tab.dataset.tab !== "camera";
+    }));
+
+    /* ---------- الأعمال ---------- */
+    function renderAll() { renderCats(); renderItems(); renderCams(); }
+    function renderCats() {
+      $("cats").innerHTML = "";
+      CATS.forEach(([key, name]) => {
+        const b = document.createElement("button");
+        b.className = "cat"; b.setAttribute("aria-pressed", key === currentCat);
+        b.innerHTML = `${name}<b>(${data.works.filter(w => w.type === key).length})</b>`;
+        b.addEventListener("click", () => { currentCat = key; renderCats(); renderItems(); });
+        $("cats").appendChild(b);
+      });
+      $("add-video").hidden = currentCat === "photo";
+      $("add-photo").hidden = currentCat !== "photo";
+    }
+    // تحريك عنصر جوا نفس التصنيف (بيبدّله مع اللي قبله أو بعده من نفس النوع)
+    function moveWork(w, dir) {
+      const same = data.works.filter(x => x.type === w.type);
+      const i = same.indexOf(w), other = same[i + dir];
+      if (!other) return;
+      const a = data.works.indexOf(w), b = data.works.indexOf(other);
+      [data.works[a], data.works[b]] = [data.works[b], data.works[a]];
+      setDirty(); renderItems();
+    }
+    function renderItems() {
+      const list = $("items"); list.innerHTML = "";
+      const items = data.works.filter(w => w.type === currentCat);
+      if (!items.length) { list.innerHTML = `<div class="empty">ما في أعمال بهالتصنيف لسا. ضيف من تحت.</div>`; return; }
+      items.forEach((w, i) => {
+        const row = document.createElement("div");
+        row.className = "item" + (pending.has(w.image) ? " pending" : "");
+        const img = document.createElement("img"); img.className = "thumb"; img.src = preview(w.image); img.alt = ""; img.loading = "lazy";
+        const fields = document.createElement("div"); fields.className = "item-fields";
+        if (w.type !== "photo") {
+          const t = document.createElement("input"); t.type = "text"; t.value = w.title || ""; t.placeholder = "العنوان";
+          t.addEventListener("input", () => { w.title = t.value; setDirty(); });
+          const l = document.createElement("input"); l.type = "url"; l.className = "ltr"; l.value = w.link || ""; l.placeholder = "رابط الدرايف";
+          l.addEventListener("change", () => {
+            const id = driveId(l.value);
+            if (!id) { toast("هاد مش رابط فيديو من الدرايف", "err"); l.value = w.link; return; }
+            w.link = `https://drive.google.com/file/d/${id}/view`; setDirty();
+          });
+          fields.append(t, l);
+        } else {
+          fields.innerHTML = `<span>${i === 0 ? "الصورة الكبيرة بالمعرض" : "صورة"} ${pending.has(w.image) ? '<span class="badge">جديدة</span>' : ""}</span>`;
+        }
+        const actions = document.createElement("div"); actions.className = "item-actions";
+        const up = Object.assign(document.createElement("button"), { className: "icon-btn", title: "لفوق", innerHTML: ICON_UP, disabled: i === 0 });
+        const down = Object.assign(document.createElement("button"), { className: "icon-btn", title: "لتحت", innerHTML: ICON_DOWN, disabled: i === items.length - 1 });
+        const del = Object.assign(document.createElement("button"), { className: "icon-btn danger", title: "حذف", innerHTML: ICON_DEL });
+        up.onclick = () => moveWork(w, -1); down.onclick = () => moveWork(w, 1);
+        del.onclick = () => {
+          if (!confirm("أكيد بدك تحذف هالعمل من الموقع؟")) return;
+          data.works.splice(data.works.indexOf(w), 1); pending.delete(w.image); setDirty(); renderCats(); renderItems();
+        };
+        actions.append(up, down, del);
+        row.append(img, fields, actions); list.appendChild(row);
+      });
+    }
+
+    let coverFile = null;
+    $("new-cover").addEventListener("change", e => { coverFile = e.target.files[0] || null; $("new-cover-name").textContent = coverFile ? coverFile.name : "اختار غلاف (اختياري)"; });
+    $("add-video-btn").addEventListener("click", async () => {
+      const id = driveId($("new-link").value.trim());
+      if (!id) { toast("الصق رابط فيديو من Google Drive", "err"); return; }
+      const title = $("new-title").value.trim();
+      if (!title) { toast("اكتب عنوان للفيديو", "err"); return; }
+      let image = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+      if (coverFile) { const p = newPath("works", currentCat); pending.set(p, await shrink(coverFile, 1000)); image = p; }
+      // العمل الجديد بيطلع آخر شي بتصنيفه، وفيك ترفعه بالأسهم
+      data.works.push({ type: currentCat, title, image, link: `https://drive.google.com/file/d/${id}/view` });
+      $("new-link").value = ""; $("new-title").value = ""; coverFile = null; $("new-cover").value = ""; $("new-cover-name").textContent = "اختار غلاف (اختياري)";
+      setDirty(); renderCats(); renderItems(); toast("انضاف ✓ لا تنسى تكبس «حفظ ونشر»", "ok");
+    });
+    $("new-photos").addEventListener("change", async e => {
+      const files = [...e.target.files]; e.target.value = "";
+      if (!files.length) return;
+      toast("عم جهّز الصور…", "", 0);
+      for (const f of files) {
+        const p = newPath("works", "photo"); pending.set(p, await shrink(f, 1800));
+        data.works.push({ type: "photo", image: p, link: p });
+      }
+      setDirty(); renderCats(); renderItems(); toast(`انضافت ${files.length} صورة ✓ لا تنسى تكبس «حفظ ونشر»`, "ok");
+    });
+
+    /* ---------- صور الكاميرا ---------- */
+    function renderCams() {
+      const grid = $("cams"); grid.innerHTML = "";
+      data.camera.forEach((s, i) => {
+        const card = document.createElement("div"); card.className = "cam" + (pending.has(s.src) ? " pending" : "");
+        const pv = document.createElement("div"); pv.className = "cam-preview"; pv.title = "اكبس لتحدد وين يتركّز القص";
+        const img = document.createElement("img"); img.src = preview(s.src); img.alt = ""; img.style.objectPosition = s.pos || "center";
+        const num = document.createElement("span"); num.className = "cam-num"; num.textContent = i + 1;
+        pv.append(img, num);
+        // الكبس على الصورة بيحدد مركز القص بالنسبة المئوية
+        pv.addEventListener("click", e => {
+          const r = pv.getBoundingClientRect();
+          s.pos = `${Math.round((e.clientX - r.left) / r.width * 100)}% ${Math.round((e.clientY - r.top) / r.height * 100)}%`;
+          img.style.objectPosition = s.pos; setDirty();
+        });
+        const bar = document.createElement("div"); bar.className = "cam-bar";
+        const info = document.createElement("small"); info.textContent = i === 0 ? "الصورة الأولى" : pending.has(s.src) ? "جديدة" : "";
+        const actions = document.createElement("div"); actions.className = "item-actions";
+        const up = Object.assign(document.createElement("button"), { className: "icon-btn", title: "قبل", innerHTML: ICON_UP, disabled: i === 0 });
+        const down = Object.assign(document.createElement("button"), { className: "icon-btn", title: "بعد", innerHTML: ICON_DOWN, disabled: i === data.camera.length - 1 });
+        const del = Object.assign(document.createElement("button"), { className: "icon-btn danger", title: "حذف", innerHTML: ICON_DEL, disabled: data.camera.length === 1 });
+        up.onclick = () => { [data.camera[i - 1], data.camera[i]] = [data.camera[i], data.camera[i - 1]]; setDirty(); renderCams(); };
+        down.onclick = () => { [data.camera[i + 1], data.camera[i]] = [data.camera[i], data.camera[i + 1]]; setDirty(); renderCams(); };
+        del.onclick = () => { if (!confirm("أحذف هالصورة من الكاميرا؟")) return; data.camera.splice(i, 1); pending.delete(s.src); setDirty(); renderCams(); };
+        actions.append(up, down, del);
+        bar.append(info, actions); card.append(pv, bar); grid.appendChild(card);
+      });
+    }
+    $("new-cams").addEventListener("change", async e => {
+      const files = [...e.target.files]; e.target.value = "";
+      if (!files.length) return;
+      toast("عم جهّز الصور…", "", 0);
+      for (const f of files) {
+        const p = newPath("cam", "cam"); pending.set(p, await shrink(f, 1400));
+        data.camera.push({ src: p, pos: "center 30%" });
+      }
+      setDirty(); renderCams(); toast("انضافت ✓ اكبس على كل صورة لتحدد القص، وبعدين «حفظ ونشر»", "ok", 5000);
+    });
+
+    /* ---------- الحفظ: كل الصور الجديدة و content.json بكومِت واحد ---------- */
+    $("save").addEventListener("click", async () => {
+      const editor = $("editor"); editor.classList.add("saving"); $("save").disabled = true;
+      toast("عم احفظ وانشر…", "", 0);
+      try {
+        // الصور اللي انحذفت قبل الحفظ ما بتنرفع
+        const used = new Set([...data.works.map(w => w.image), ...data.camera.map(s => s.src)]);
+        const ref = await gh(`/git/ref/heads/${BRANCH}`);
+        const head = await gh(`/git/commits/${ref.object.sha}`);
+        const tree = [];
+        for (const [path, f] of pending) {
+          if (!used.has(path)) continue;
+          const blob = await gh("/git/blobs", { method: "POST", body: JSON.stringify({ content: f.base64, encoding: "base64" }) });
+          tree.push({ path, mode: "100644", type: "blob", sha: blob.sha });
+        }
+        const json = JSON.stringify(data, null, 2) + "\n";
+        const jblob = await gh("/git/blobs", { method: "POST", body: JSON.stringify({ content: json, encoding: "utf-8" }) });
+        tree.push({ path: CONTENT, mode: "100644", type: "blob", sha: jblob.sha });
+        const newTree = await gh("/git/trees", { method: "POST", body: JSON.stringify({ base_tree: head.tree.sha, tree }) });
+        const commit = await gh("/git/commits", { method: "POST", body: JSON.stringify({ message: "تحديث الأعمال وصور الكاميرا من الداش بورد", tree: newTree.sha, parents: [ref.object.sha] }) });
+        await gh(`/git/refs/heads/${BRANCH}`, { method: "PATCH", body: JSON.stringify({ sha: commit.sha }) });
+        pending.clear(); setDirty(false); renderAll();
+        toast("انحفظ ✓ الموقع بيتحدّث خلال دقيقة تقريباً", "ok", 7000);
+      } catch (e) {
+        setDirty(true);
+        toast(e.status === 403 || e.status === 404 ? "التوكن ما معه صلاحية كتابة (Contents: Read and write)" : "صار خطأ بالحفظ، جرّب كمان مرة", "err", 7000);
+      } finally { editor.classList.remove("saving"); }
+    });
+
+    /* ---------- البداية ---------- */
+    const saved = store(true);
+    if (saved) login(saved); else $("login").hidden = false;
+  </script>
+</body>
+</html>

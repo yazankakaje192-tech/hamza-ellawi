@@ -807,37 +807,9 @@
     // اكتب الإيميل هون ليظهر بطرق التواصل (إذا تركته فاضي ما بيظهر)
     const EMAIL = "looohabbe@gmail.com";
 
-    // الأعمال: type = "promo" أو "reel" أو "photo" أو "video" أو "drone" أو "motion"
-    // image = صورة الغلاف، link = الرابط اللي بينفتح (انستغرام، يوتيوب، درايف...)
-    // أول عمل بيطلع كبير بالمعرض، فحط أقوى شغل أول شي
-    const WORKS = [
-      { type: "promo", title: "معرض دمشق الدولي، النسخة 63", image: "images/works/promo-07.webp", link: "https://drive.google.com/file/d/10RYMpo71vrgee-Izd_2aIu-5AFjWmChG/view" },
-      { type: "promo", title: "برومو وزارة الأوقاف السورية", image: "images/works/promo-02.webp", link: "https://drive.google.com/file/d/1eLI2xeF9egJkRkYMUs5rjUv3xTFDE_ET/view" },
-      { type: "promo", title: "جولة وزير الثقافة في مدينة تدمر", image: "images/works/promo-05.webp", link: "https://drive.google.com/file/d/1Oz-pzLT4HDOxHPlMokBmkgv4stgegFKf/view" },
-      { type: "promo", title: "برومو ملتقى مديريات وزارة الثقافة", image: "images/works/promo-03.webp", link: "https://drive.google.com/file/d/1KiPFgS24KhNXhSUyjvYCXdUCba-cbEBO/view" },
-      { type: "promo", title: "برومو الملتقى السوري لفن الخط العربي", image: "images/works/promo-01.webp", link: "https://drive.google.com/file/d/1tBYG8xUN-12WYI_g5-lKscEXRdcmSLOA/view" },
-      { type: "promo", title: "جولة وزير الثقافة في مدينة القطيفة", image: "images/works/promo-04.webp", link: "https://drive.google.com/file/d/16zl2XvgEJ0R3-Qm5esguKYfZlWkrC6HK/view" },
-      { type: "promo", title: "دمشق القديمة", image: "images/works/promo-06.webp", link: "https://drive.google.com/file/d/1-O6v79zCJORPsA8FoikO7M94l4LJhGWA/view" },
-      { type: "reel", title: "الدكتور محمد عبد الرحيم سلطان العلماء", image: "images/works/reel-02.webp", link: "https://drive.google.com/file/d/1pw9VRJ7kqtrcD9XKeSt8eB-hoIuZsYZX/view" },
-      { type: "reel", title: "الملتقى السوري لفن الخط العربي والزخرفة", image: "images/works/reel-03.webp", link: "https://drive.google.com/file/d/1jGy7_T6lQx28xbPP-_z8xNn29_IMyxcx/view" },
-      { type: "reel", title: "المهرجان الدولي للشعر العربي", image: "images/works/reel-04.webp", link: "https://drive.google.com/file/d/1KoioczdASDQXOmpJdt9C28StU--D6uT7/view" },
-      { type: "reel", title: "الحياة الطبية", image: "images/works/reel-01.webp", link: "https://drive.google.com/file/d/1Z7oQeHWCbyDIq6jHEHRkBKDHmtL7xe6a/view" },
-      { type: "reel", title: "دورة المحاسبة لغير المختصين", image: "images/works/reel-06.webp", link: "https://drive.google.com/file/d/1dGcGybUk6kuTTA8GTPj55vCuavBmvlif/view" },
-      { type: "photo", image: "images/works/photo-08.webp", link: "images/works/photo-08.webp" },
-      { type: "photo", image: "images/works/photo-02.webp", link: "images/works/photo-02.webp" },
-      { type: "photo", image: "images/works/photo-04.webp", link: "images/works/photo-04.webp" },
-      { type: "photo", image: "images/works/photo-06.webp", link: "images/works/photo-06.webp" },
-      { type: "photo", image: "images/works/photo-07.webp", link: "images/works/photo-07.webp" },
-      { type: "photo", image: "images/works/photo-10.webp", link: "images/works/photo-10.webp" },
-      { type: "photo", image: "images/works/photo-03.webp", link: "images/works/photo-03.webp" },
-      { type: "photo", image: "images/works/photo-05.webp", link: "images/works/photo-05.webp" },
-      { type: "photo", image: "images/works/photo-11.webp", link: "images/works/photo-11.webp" },
-      { type: "photo", image: "images/works/photo-01.webp", link: "images/works/photo-01.webp" },
-      { type: "photo", image: "images/works/photo-09.webp", link: "images/works/photo-09.webp" },
-      { type: "motion", title: "معرض دمشق الدولي 63", image: "images/works/motion-01.webp", link: "https://drive.google.com/file/d/1smezMzTxKlXiD6yk-0U9PJ1ieP0S7hlU/view" },
-      { type: "motion", title: "وزارة الثقافة، مديرية الفعاليات", image: "images/works/motion-03.webp", link: "https://drive.google.com/file/d/1dBQkgxlQX7l07Hxhln5fHxlz18PYmc7d/view" },
-      { type: "motion", title: "معرض ناستكس للنسيج السوري", image: "images/works/motion-02.webp", link: "https://drive.google.com/file/d/1Xv4cq6tRN0rF4CMhQA3nYnUEbO97uYxR/view" },
-    ];
+    // الأعمال وصور الكاميرا صاروا بملف content.json، وبيتعدّلوا من صفحة admin.html
+    // type = "promo" أو "reel" أو "photo" أو "video" أو "drone" أو "motion"
+    let WORKS = [];
 
     const LABELS = { promo: "برومو", reel: "ريل", photo: "صورة", video: "فيديو", drone: "درون", motion: "موشن غرافيك" };
     const DRIVE = "https://drive.google.com/drive/folders/1sg4WLhcwFk9LsJEtXqnqrVE9cU2zD7wB";
@@ -948,14 +920,8 @@
 
     // الكاميرا: كل ما ينكبس زر التصوير (أو كل كم ثانية لحالها) بيتسكّر الغالق وبيضرب فلاش
     // وبتطلع على الشاشة صورة تانية لحمزة. pos = وين يتركّز القص بالصورة
-    const CAMERA_SHOTS = [
-      { src: "images/cam/cam-03.webp", pos: "center 11%" },
-      { src: "images/camera.webp", pos: "62% 30%" },
-      { src: "images/cam/cam-02.webp", pos: "40% 35%" },
-      { src: "images/cam/cam-04.webp", pos: "62% 30%" },
-      { src: "images/cam/cam-05.webp", pos: "center 32%" },
-      { src: "images/cam/cam-06.webp", pos: "58% 30%" },
-    ];
+    // بتتعبّى من content.json، وهي أول صورة لحد ما يتحمّل الملف
+    let CAMERA_SHOTS = [{ src: "images/cam/cam-03.webp", pos: "center 11%" }];
     const camera = document.getElementById("camera");
     const camScreen = document.getElementById("camera-screen");
     const camImg = camScreen.querySelector("img");
@@ -964,7 +930,6 @@
     const camDial = camera.querySelector(".cam-dial");
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let shotIndex = 0, dialAngle = 0, shooting = false, autoTimer;
-    CAMERA_SHOTS.slice(1).forEach(s => { new Image().src = s.src; });
 
     function takeShot() {
       if (shooting) return;
@@ -1057,7 +1022,24 @@
       document.querySelectorAll(".filter").forEach(b => b.setAttribute("aria-pressed", b === btn));
       renderGallery(btn.dataset.filter);
     }));
-    renderGallery("promo");
+
+    // تحميل المحتوى من content.json (no-cache ليبيّن آخر تعديل من الداش بورد بسرعة)
+    const currentFilter = () => document.querySelector('.filter[aria-pressed="true"]').dataset.filter;
+    fetch("content.json", { cache: "no-cache" })
+      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+      .then(data => {
+        if (Array.isArray(data.works)) WORKS = data.works;
+        if (Array.isArray(data.camera) && data.camera.length) {
+          CAMERA_SHOTS = data.camera;
+          shotIndex = 0;
+          camImg.src = CAMERA_SHOTS[0].src;
+          camImg.style.objectPosition = CAMERA_SHOTS[0].pos || "center";
+          CAMERA_SHOTS.slice(1).forEach(s => { new Image().src = s.src; });
+          restartAuto();
+        }
+      })
+      .catch(() => {})
+      .finally(() => renderGallery(currentFilter()));
 
     // فورم صغير قبل الواتساب: كل روابط الواتساب بتفتحه، وبعدين بتنفتح الرسالة جاهزة
     const WA_NUMBER = "963996522320";
