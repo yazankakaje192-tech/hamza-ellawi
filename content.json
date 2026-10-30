@@ -2,32 +2,28 @@
   "_note": "هالملف بيتعدّل من صفحة admin.html. فيك تعدّله بإيدك كمان.",
   "camera": [
     {
-      "src": "images/cam/cam-03.webp",
-      "pos": "center 11%"
-    },
-    {
       "src": "images/camera.webp",
       "pos": "62% 30%"
+    },
+    {
+      "src": "images/cam/cam-03.webp",
+      "pos": "center 11%"
     },
     {
       "src": "images/cam/cam-05.webp",
       "pos": "center 32%"
     },
     {
-      "src": "images/cam/cam-02.webp",
-      "pos": "40% 35%"
-    },
-    {
       "src": "images/cam/cam-04.webp",
       "pos": "62% 30%"
     },
     {
-      "src": "images/cam/cam-06.webp",
-      "pos": "58% 30%"
+      "src": "images/cam/cam-02.webp",
+      "pos": "40% 35%"
     },
     {
-      "src": "images/cam/cam-mvv1oo7o1qxs.webp",
-      "pos": "center 30%"
+      "src": "images/cam/cam-06.webp",
+      "pos": "58% 30%"
     }
   ],
   "works": [
