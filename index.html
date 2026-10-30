@@ -126,10 +126,35 @@
       background: linear-gradient(180deg, var(--burgundy-500), var(--burgundy-700));
       border-radius: 1.4em 1.4em 0 0; box-shadow: inset 0 .15em 0 rgba(255,255,255,.08);
     }
-    .camera::after {
-      content: ""; position: absolute; top: -1.5em; right: 4.4em; width: 5.6em; height: 1.8em;
-      background: var(--beige); border-radius: .9em .9em 0 0;
+    .camera { transition: transform .5s ease; will-change: transform; }
+
+    /* زر التصوير: بيلمع ليعزم الزائر يكبسه، وبينضغط لما ينكبس */
+    .cam-shutter {
+      position: absolute; top: -1.5em; right: 4.4em; width: 5.6em; height: 1.8em; padding: 0; border: 0; cursor: pointer;
+      background: var(--beige); border-radius: .9em .9em 0 0; transform-origin: bottom;
+      transition: transform .12s ease, background .2s; animation: shutter-glow 2.4s ease-out infinite;
     }
+    .cam-shutter:hover { background: var(--white); }
+    .cam-shutter.pressed { transform: scaleY(.45); }
+    @keyframes shutter-glow {
+      0% { box-shadow: 0 0 0 0 rgba(241,217,166,.7); }
+      70%, 100% { box-shadow: 0 0 0 1.4em rgba(241,217,166,0); }
+    }
+    .cam-hint { margin: 1.6em 0 0; color: rgba(241,217,166,.75); font-size: .92rem; }
+
+    /* الغالق: شفرتين بيتسكّروا وبيتفتحوا، وبعدهن فلاش أبيض */
+    .camera-screen { cursor: pointer; }
+    .blade {
+      position: absolute; left: 0; right: 0; height: 50.5%; z-index: 2; background: #0B0103;
+      transition: transform .15s ease-in;
+    }
+    .blade.top { top: 0; transform: translateY(-101%); }
+    .blade.bottom { bottom: 0; transform: translateY(101%); }
+    .camera-screen.closing .blade { transform: none; }
+    .flash { position: absolute; inset: 0; z-index: 3; background: #fff; opacity: 0; pointer-events: none; }
+    .flash.go { animation: flash .55s ease-out; }
+    @keyframes flash { 0% { opacity: .85; } 100% { opacity: 0; } }
+    .camera-screen::after { z-index: 4; }
     .camera-screen {
       position: relative; border-radius: 1em; overflow: hidden; background: #000;
       border: .7em solid #160206; aspect-ratio: 3 / 2;
@@ -144,7 +169,7 @@
       display: flex; flex-direction: column; align-items: center; justify-content: space-between;
     }
     .cam-dial {
-      width: 7.2em; height: 7.2em; border-radius: 50%; position: relative;
+      width: 7.2em; height: 7.2em; border-radius: 50%; position: relative; transition: transform .45s ease;
       background: repeating-conic-gradient(var(--burgundy-900) 0 6deg, #3a0811 6deg 12deg);
       box-shadow: 0 0 0 .25em rgba(241,217,166,.45);
     }
@@ -333,6 +358,7 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; }
       .js .reveal { opacity: 1; transform: none; }
+      .cam-shutter { animation: none; }
     }
 
     @media (max-width: 960px) {
@@ -399,9 +425,11 @@
           <a href="#works" class="btn btn-solid">تصفّح المعرض</a>
           <a href="https://wa.me/963996522320" target="_blank" rel="noopener" class="btn btn-line">اطلب خدمة</a>
         </div>
-        <div class="camera">
-          <div class="camera-screen">
+        <div class="camera" id="camera">
+          <button type="button" class="cam-shutter" id="cam-shutter" aria-label="التقط صورة"></button>
+          <div class="camera-screen" id="camera-screen">
             <img src="images/camera.webp" alt="محمد حمزة علاوي" width="1600" height="900">
+            <span class="blade top"></span><span class="blade bottom"></span><span class="flash"></span>
           </div>
           <div class="camera-controls" aria-hidden="true">
             <span class="cam-dial"></span>
@@ -410,6 +438,7 @@
             <span class="cam-brand">HAMZA</span>
           </div>
         </div>
+        <p class="cam-hint">اكبس زر التصوير لتشوف لقطات من شغلي</p>
       </div>
     </section>
 
@@ -662,6 +691,65 @@
     addEventListener("scroll", onScroll, { passive: true });
     addEventListener("resize", onScroll);
     onScroll();
+
+    // الكاميرا: كل ما ينكبس زر التصوير (أو كل كم ثانية لحالها) بيتسكّر الغالق وبيضرب فلاش
+    // وبتطلع على الشاشة لقطة تانية من شغل حمزة. pos = وين يتركّز القص بالصورة
+    const CAMERA_SHOTS = [
+      { src: "images/camera.webp", pos: "62% 30%" },
+      { src: "images/works/photo-08.webp", pos: "center" },
+      { src: "images/works/photo-04.webp", pos: "center" },
+      { src: "images/works/photo-02.webp", pos: "center 60%" },
+      { src: "images/works/photo-06.webp", pos: "center" },
+      { src: "images/works/photo-10.webp", pos: "center 30%" },
+      { src: "images/works/photo-03.webp", pos: "center 40%" },
+      { src: "images/works/photo-07.webp", pos: "center" },
+    ];
+    const camera = document.getElementById("camera");
+    const camScreen = document.getElementById("camera-screen");
+    const camImg = camScreen.querySelector("img");
+    const camFlash = camScreen.querySelector(".flash");
+    const camShutter = document.getElementById("cam-shutter");
+    const camDial = camera.querySelector(".cam-dial");
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let shotIndex = 0, dialAngle = 0, shooting = false, autoTimer;
+    CAMERA_SHOTS.slice(1).forEach(s => { new Image().src = s.src; });
+
+    function takeShot() {
+      if (shooting) return;
+      shooting = true;
+      camShutter.classList.add("pressed");
+      camScreen.classList.add("closing");
+      setTimeout(() => {
+        shotIndex = (shotIndex + 1) % CAMERA_SHOTS.length;
+        camImg.src = CAMERA_SHOTS[shotIndex].src;
+        camImg.style.objectPosition = CAMERA_SHOTS[shotIndex].pos;
+        camImg.alt = shotIndex ? "لقطة من أعمال حمزة علاوي" : "محمد حمزة علاوي";
+        camScreen.classList.remove("closing");
+        camFlash.classList.remove("go"); void camFlash.offsetWidth; camFlash.classList.add("go");
+        camDial.style.transform = `rotate(${dialAngle += 40}deg)`;
+        camShutter.classList.remove("pressed");
+        shooting = false;
+      }, 170);
+    }
+    function restartAuto() {
+      clearInterval(autoTimer);
+      if (!reduceMotion) autoTimer = setInterval(() => { if (!document.hidden && scrollY < innerHeight) takeShot(); }, 5000);
+    }
+    [camShutter, camScreen].forEach(el => el.addEventListener("click", () => { takeShot(); restartAuto(); }));
+    restartAuto();
+
+    // الكاميرا بتميل شوي مع حركة الماوس
+    const hero = document.getElementById("hero");
+    if (!reduceMotion) {
+      hero.addEventListener("pointermove", e => {
+        if (e.pointerType !== "mouse") return;
+        const r = camera.getBoundingClientRect();
+        const x = (e.clientX - (r.left + r.width / 2)) / innerWidth;
+        const y = (e.clientY - (r.top + r.height / 2)) / innerHeight;
+        camera.style.transform = `perspective(1400px) rotateY(${x * 14}deg) rotateX(${-y * 10}deg)`;
+      });
+      hero.addEventListener("pointerleave", () => { camera.style.transform = ""; });
+    }
 
     // مشغّل الفيديو: بيشغّل فيديو الدرايف جوا الموقع، والعمودي (ريلز) بيطلع طولي
     const player = document.getElementById("player");
