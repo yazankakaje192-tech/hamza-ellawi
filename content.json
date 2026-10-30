@@ -10,6 +10,10 @@
       "pos": "62% 30%"
     },
     {
+      "src": "images/cam/cam-05.webp",
+      "pos": "center 32%"
+    },
+    {
       "src": "images/cam/cam-02.webp",
       "pos": "40% 35%"
     },
@@ -18,18 +22,18 @@
       "pos": "62% 30%"
     },
     {
-      "src": "images/cam/cam-05.webp",
-      "pos": "center 32%"
-    },
-    {
       "src": "images/cam/cam-06.webp",
       "pos": "58% 30%"
+    },
+    {
+      "src": "images/cam/cam-mvv1oo7o1qxs.webp",
+      "pos": "center 30%"
     }
   ],
   "works": [
     {
       "type": "promo",
-      "title": "معرض دمشق الدولي، النسخة 63",
+      "title": "معرض دمشق الدولي ، النسخة 63",
       "image": "images/works/promo-07.webp",
       "link": "https://drive.google.com/file/d/10RYMpo71vrgee-Izd_2aIu-5AFjWmChG/view"
     },
