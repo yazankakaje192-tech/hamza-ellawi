@@ -438,7 +438,7 @@
             <span class="cam-brand">HAMZA</span>
           </div>
         </div>
-        <p class="cam-hint">اكبس زر التصوير لتشوف لقطات من شغلي</p>
+        <p class="cam-hint">اكبس زر التصوير 📸</p>
       </div>
     </section>
 
@@ -693,16 +693,14 @@
     onScroll();
 
     // الكاميرا: كل ما ينكبس زر التصوير (أو كل كم ثانية لحالها) بيتسكّر الغالق وبيضرب فلاش
-    // وبتطلع على الشاشة لقطة تانية من شغل حمزة. pos = وين يتركّز القص بالصورة
+    // وبتطلع على الشاشة صورة تانية لحمزة. pos = وين يتركّز القص بالصورة
     const CAMERA_SHOTS = [
       { src: "images/camera.webp", pos: "62% 30%" },
-      { src: "images/works/photo-08.webp", pos: "center" },
-      { src: "images/works/photo-04.webp", pos: "center" },
-      { src: "images/works/photo-02.webp", pos: "center 60%" },
-      { src: "images/works/photo-06.webp", pos: "center" },
-      { src: "images/works/photo-10.webp", pos: "center 30%" },
-      { src: "images/works/photo-03.webp", pos: "center 40%" },
-      { src: "images/works/photo-07.webp", pos: "center" },
+      { src: "images/cam/cam-02.webp", pos: "40% 35%" },
+      { src: "images/cam/cam-03.webp", pos: "center 11%" },
+      { src: "images/cam/cam-04.webp", pos: "62% 30%" },
+      { src: "images/cam/cam-05.webp", pos: "center 32%" },
+      { src: "images/cam/cam-06.webp", pos: "58% 30%" },
     ];
     const camera = document.getElementById("camera");
     const camScreen = document.getElementById("camera-screen");
@@ -723,7 +721,6 @@
         shotIndex = (shotIndex + 1) % CAMERA_SHOTS.length;
         camImg.src = CAMERA_SHOTS[shotIndex].src;
         camImg.style.objectPosition = CAMERA_SHOTS[shotIndex].pos;
-        camImg.alt = shotIndex ? "لقطة من أعمال حمزة علاوي" : "محمد حمزة علاوي";
         camScreen.classList.remove("closing");
         camFlash.classList.remove("go"); void camFlash.offsetWidth; camFlash.classList.add("go");
         camDial.style.transform = `rotate(${dialAngle += 40}deg)`;
