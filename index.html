@@ -163,7 +163,7 @@
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background: linear-gradient(130deg, rgba(255,255,255,.1), transparent 35%);
     }
-    .camera-screen img { width: 100%; height: 100%; object-fit: cover; object-position: 62% 30%; }
+    .camera-screen img { width: 100%; height: 100%; object-fit: cover; object-position: center 11%; }
     .camera-controls {
       position: absolute; top: 2.4em; bottom: 2.4em; right: 2.2em; width: 10.6em;
       display: flex; flex-direction: column; align-items: center; justify-content: space-between;
@@ -565,7 +565,7 @@
         <div class="camera" id="camera">
           <button type="button" class="cam-shutter" id="cam-shutter" aria-label="التقط صورة"></button>
           <div class="camera-screen" id="camera-screen">
-            <img src="images/camera.webp" alt="محمد حمزة علاوي" width="1600" height="900">
+            <img src="images/cam/cam-03.webp" alt="محمد حمزة علاوي" width="787" height="1400">
             <span class="blade top"></span><span class="blade bottom"></span><span class="flash"></span>
           </div>
           <div class="camera-controls" aria-hidden="true">
@@ -932,12 +932,8 @@
     // الكاميرا: كل ما ينكبس زر التصوير (أو كل كم ثانية لحالها) بيتسكّر الغالق وبيضرب فلاش
     // وبتطلع على الشاشة صورة تانية لحمزة. pos = وين يتركّز القص بالصورة
     const CAMERA_SHOTS = [
-      { src: "images/camera.webp", pos: "62% 30%" },
-      { src: "images/cam/cam-02.webp", pos: "40% 35%" },
+      // صورة وحدة بس: الزر بيعمل غالق وفلاش على نفس الصورة. لترجّع التبديل، ضيف صور هون
       { src: "images/cam/cam-03.webp", pos: "center 11%" },
-      { src: "images/cam/cam-04.webp", pos: "62% 30%" },
-      { src: "images/cam/cam-05.webp", pos: "center 32%" },
-      { src: "images/cam/cam-06.webp", pos: "58% 30%" },
     ];
     const camera = document.getElementById("camera");
     const camScreen = document.getElementById("camera-screen");
@@ -967,7 +963,7 @@
     }
     function restartAuto() {
       clearInterval(autoTimer);
-      if (!reduceMotion) autoTimer = setInterval(() => { if (!document.hidden && scrollY < innerHeight) takeShot(); }, 5000);
+      if (!reduceMotion && CAMERA_SHOTS.length > 1) autoTimer = setInterval(() => { if (!document.hidden && scrollY < innerHeight) takeShot(); }, 5000);
     }
     [camShutter, camScreen].forEach(el => el.addEventListener("click", () => { takeShot(); restartAuto(); }));
     restartAuto();
