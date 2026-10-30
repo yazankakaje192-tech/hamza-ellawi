@@ -163,7 +163,9 @@
       content: ""; position: absolute; inset: 0; pointer-events: none;
       background: linear-gradient(130deg, rgba(255,255,255,.1), transparent 35%);
     }
-    .camera-screen img { width: 100%; height: 100%; object-fit: cover; object-position: center 11%; }
+    .camera-screen img { width: 100%; height: 100%; object-fit: cover; object-position: center 11%; transition: opacity .35s ease; }
+    /* الشاشة بتضل فاضية لحد ما يوصل ترتيب الصور من content.json، فما بتبيّن صورة غلط أول */
+    .camera-screen img.wait { opacity: 0; }
     .camera-controls {
       position: absolute; top: 2.4em; bottom: 2.4em; right: 2.2em; width: 10.6em;
       display: flex; flex-direction: column; align-items: center; justify-content: space-between;
@@ -521,8 +523,9 @@
 </head>
 <body>
   <script>
-    // بيشتغل قبل ما ترسم الصفحة: افتتاحية الغالق (مرة وحدة بكل زيارة)
+    // بيشتغل قبل ما ترسم الصفحة: بيبلّش يجيب content.json بكير، وافتتاحية الغالق (مرة وحدة بكل زيارة)
     document.documentElement.classList.add("js");
+    window.contentPromise = fetch("content.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); });
     (function () {
       var seen = false;
       try { seen = sessionStorage.getItem("introSeen") === "1"; sessionStorage.setItem("introSeen", "1"); } catch (e) {}
@@ -574,7 +577,7 @@
         <div class="camera" id="camera">
           <button type="button" class="cam-shutter" id="cam-shutter" aria-label="التقط صورة"></button>
           <div class="camera-screen" id="camera-screen">
-            <img src="images/cam/cam-03.webp" alt="محمد حمزة علاوي" width="787" height="1400">
+            <img class="wait" alt="محمد حمزة علاوي" width="787" height="1400">
             <span class="blade top"></span><span class="blade bottom"></span><span class="flash"></span>
           </div>
           <div class="camera-controls" aria-hidden="true">
@@ -1023,23 +1026,29 @@
       renderGallery(btn.dataset.filter);
     }));
 
-    // تحميل المحتوى من content.json (no-cache ليبيّن آخر تعديل من الداش بورد بسرعة)
+    // تحميل المحتوى من content.json (انطلب بأول الصفحة، no-cache ليبيّن آخر تعديل من الداش بورد بسرعة)
     const currentFilter = () => document.querySelector('.filter[aria-pressed="true"]').dataset.filter;
-    fetch("content.json", { cache: "no-cache" })
-      .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    function showFirstShot() {
+      shotIndex = 0;
+      camImg.onload = camImg.onerror = () => camImg.classList.remove("wait");
+      camImg.src = CAMERA_SHOTS[0].src;
+      camImg.style.objectPosition = CAMERA_SHOTS[0].pos || "center";
+    }
+    // إذا الملف تأخّر كتير، منفرجي الصورة الاحتياطية بدل ما تضل الشاشة فاضية
+    const firstShotFallback = setTimeout(showFirstShot, 4000);
+    window.contentPromise
       .then(data => {
         if (Array.isArray(data.works)) WORKS = data.works;
-        if (Array.isArray(data.camera) && data.camera.length) {
-          CAMERA_SHOTS = data.camera;
-          shotIndex = 0;
-          camImg.src = CAMERA_SHOTS[0].src;
-          camImg.style.objectPosition = CAMERA_SHOTS[0].pos || "center";
-          CAMERA_SHOTS.slice(1).forEach(s => { new Image().src = s.src; });
-          restartAuto();
-        }
+        if (Array.isArray(data.camera) && data.camera.length) CAMERA_SHOTS = data.camera;
       })
       .catch(() => {})
-      .finally(() => renderGallery(currentFilter()));
+      .finally(() => {
+        clearTimeout(firstShotFallback);
+        if (!camImg.getAttribute("src")) showFirstShot();
+        CAMERA_SHOTS.slice(1).forEach(s => { new Image().src = s.src; });
+        restartAuto();
+        renderGallery(currentFilter());
+      });
 
     // فورم صغير قبل الواتساب: كل روابط الواتساب بتفتحه، وبعدين بتنفتح الرسالة جاهزة
     const WA_NUMBER = "963996522320";
