@@ -299,6 +299,15 @@
     .job h3 { margin: 0; font-size: 1.25rem; color: var(--burgundy-800); line-height: 1.4; }
     .job-org { color: var(--burgundy-500); font-size: .95rem; }
     .job p { margin: 0; color: var(--muted); }
+    .job { display: flex; flex-direction: column; }
+    .job-links { display: flex; gap: 10px; margin-top: auto; padding-top: 18px; }
+    .job-links a {
+      width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+      color: var(--burgundy-800); border: 1px solid var(--line); background: var(--cream);
+      transition: background .2s, color .2s, border-color .2s, transform .2s;
+    }
+    .job-links a:hover { background: var(--burgundy-800); color: var(--beige); border-color: var(--burgundy-800); transform: translateY(-2px); }
+    .job-links svg { width: 18px; height: 18px; }
 
     /* ===== Contact: قائمة سطور ===== */
     .contact { position: relative; isolation: isolate; overflow: hidden; background: var(--burgundy-800); color: var(--white); }
@@ -676,6 +685,10 @@
               <div><h3>المسؤول الإعلامي | إدارة الفعاليات</h3><span class="job-org">وزارة الثقافة السورية</span></div>
             </div>
             <p>أتولى إدارة وتغطية الفعاليات الثقافية الرسمية في مديرية إدارة الفعاليات، مع التركيز على الجودة السينمائية في التوثيق والمونتاج.</p>
+            <div class="job-links">
+              <a href="https://www.facebook.com/SyrSMOC/" target="_blank" rel="noopener" aria-label="فيسبوك وزارة الثقافة السورية" title="فيسبوك"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
+              <a href="https://instagram.com/mocsyr" target="_blank" rel="noopener" aria-label="انستغرام وزارة الثقافة السورية" title="انستغرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+            </div>
           </article>
           <article class="job reveal">
             <div class="job-head">
@@ -683,6 +696,10 @@
               <div><h3>المكتب الإعلامي</h3><span class="job-org">مسجد حبيب بن زيد</span></div>
             </div>
             <p>الإشراف على المحتوى المرئي للمنصات الرقمية الخاصة بالمسجد، وتقديم محتوى ديني واجتماعي بصورة فنية معاصرة.</p>
+            <div class="job-links">
+              <a href="https://www.facebook.com/profile.php?id=100079485739632" target="_blank" rel="noopener" aria-label="صفحة فيسبوك مسجد حبيب بن زيد" title="فيسبوك"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
+              <a href="https://www.facebook.com/profile.php?id=100067355899366" target="_blank" rel="noopener" aria-label="صفحة فيسبوك تانية لمسجد حبيب بن زيد" title="فيسبوك"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z"/></svg></a>
+            </div>
           </article>
         </div>
       </div>
