@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>محمد حمزة علاوي | مونتاج وتصوير وإنتاج مرئي</title>
-  <meta name="description" content="محمد حمزة علاوي، صانع محتوى مرئي من سوريا: مونتاج احترافي، تصوير فوتوغرافي، تصحيح ألوان وتغطية فعاليات. شاهد أعمالي وتواصل معي.">
+  <meta name="description" content="محمد حمزة علاوي، صانع محتوى مرئي من سوريا: مونتاج احترافي، تصوير فوتوغرافي، موشن غرافيك، تصوير بالدرون وتغطية فعاليات. شاهد أعمالي وتواصل معي.">
   <meta name="theme-color" content="#4A0D17">
 
   <!-- مشاركة الرابط على واتساب وفيسبوك -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ar_SY">
   <meta property="og:title" content="محمد حمزة علاوي | إنتاج مرئي">
-  <meta property="og:description" content="مونتاج · تصوير فوتوغرافي · تصحيح ألوان · تغطية فعاليات">
+  <meta property="og:description" content="مونتاج · تصوير فوتوغرافي · موشن غرافيك · تصوير بالدرون">
   <meta property="og:url" content="https://hamza-ellawi.netlify.app/">
   <meta property="og:image" content="https://hamza-ellawi.netlify.app/images/portrait.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -232,11 +232,15 @@
     .ribbon-back .ribbon-item { color: transparent; -webkit-text-stroke: 1.2px var(--burgundy-800); }
     .ribbon-item span { transition: color .25s, transform .25s; display: inline-block; }
     .ribbon-front .ribbon-item span:hover { color: var(--white); transform: translateY(-3px); }
-    /* فاصل على شكل فتحة عدسة بيلف */
-    .ribbon-item svg { width: .9em; height: .9em; flex: none; animation: aperture 6s linear infinite; }
-    .ribbon-front .ribbon-item svg { color: var(--beige); }
-    .ribbon-back .ribbon-item svg { color: var(--burgundy-800); animation-direction: reverse; }
-    @keyframes aperture { to { transform: rotate(360deg); } }
+    /* الفواصل: أيقونات شغل حمزة، بتطفو وتميل شوي كأنها درون عم يحوم */
+    .ribbon-item i { display: inline-flex; flex: none; animation: icon-hover 2.8s ease-in-out infinite; }
+    .ribbon-item svg { width: 1em; height: 1em; }
+    .ribbon-front .ribbon-item i { color: var(--beige); }
+    .ribbon-back .ribbon-item i { color: var(--burgundy-800); }
+    @keyframes icon-hover {
+      0%, 100% { transform: translateY(0) rotate(0); }
+      50% { transform: translateY(-5px) rotate(-8deg); }
+    }
 
     /* ===== البرامج ===== */
     .apps { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
@@ -403,7 +407,7 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; }
       .js .reveal { opacity: 1; transform: none; }
-      .cam-shutter, .ribbon-track, .ribbon-item svg { animation: none; }
+      .cam-shutter, .ribbon-track, .ribbon-item i { animation: none; }
     }
 
     @media (max-width: 960px) {
@@ -468,7 +472,7 @@
     <section class="hero" id="hero">
       <div class="wrap">
         <h1>محمد حمزة علاوي</h1>
-        <p class="hero-tag">مونتاج احترافي <b>·</b> تصوير فوتوغرافي <b>·</b> تصحيح ألوان</p>
+        <p class="hero-tag">مونتاج احترافي <b>·</b> تصوير فوتوغرافي <b>·</b> موشن غرافيك <b>·</b> طيّار درون</p>
         <div class="hero-actions">
           <a href="#works" class="btn btn-solid">تصفّح المعرض</a>
           <a href="https://wa.me/963996522320" target="_blank" rel="noopener" class="btn btn-line">اطلب خدمة</a>
@@ -496,7 +500,7 @@
         <div class="about-text reveal">
           <div class="title-row"><h2>من أنا ؟</h2></div>
           <p>أنا محمد حمزة علاوي، خبير إنتاج مرئي أجمع بين الجانب التقني الصرف والجمال الفني السينمائي. شغفي يكمن في تحويل اللقطات العادية إلى قصص بصرية مبهرة.</p>
-          <p>صقل عملي مع مؤسسات رسمية ودينية قدرتي على إدارة المحتوى وتوجيهه ليكون مؤثراً وهادفاً، من لحظة التصوير حتى آخر لمسة لون.</p>
+          <p>صقل عملي مع مؤسسات رسمية ودينية قدرتي على إدارة المحتوى وتوجيهه ليكون مؤثراً وهادفاً، من لحظة التصوير حتى آخر لقطة بالمونتاج.</p>
         </div>
         <figure class="about-photo reveal" style="margin:0">
           <img src="images/portrait.jpg" alt="صورة محمد حمزة علاوي" loading="lazy" width="1280" height="720">
@@ -543,7 +547,7 @@
             <div><h3>تصوير فوتوغرافي</h3><p>بورتريه وفعاليات ومحتوى للمنصات الرقمية بجودة عالية.</p></div>
           </article>
           <article class="service reveal">
-            <div><h3>تصحيح الألوان</h3><p>تلوين يعطي كل مشهد إحساسه ويوحّد هوية العمل البصرية.</p></div>
+            <div><h3>تصوير بالدرون</h3><p>لقطات جوية سينمائية بتكشف المكان والفعالية من زاوية مختلفة.</p></div>
           </article>
           <article class="service reveal">
             <div><h3>تغطية الفعاليات</h3><p>توثيق كامل للفعاليات الرسمية والثقافية من التصوير حتى النشر.</p></div>
@@ -562,7 +566,7 @@
             <div class="app-icon pr" aria-hidden="true">Pr</div>
             <div>
               <h4>Adobe Premiere Pro</h4>
-              <p>المونتاج، الإيقاع، الصوت وتصحيح الألوان</p>
+              <p>المونتاج، الإيقاع والصوت</p>
             </div>
           </article>
           <article class="app reveal">
@@ -604,7 +608,7 @@
       <div class="wrap">
         <div class="contact-intro reveal">
           <h2>لنصنع إبداعاً <span>مرئياً</span></h2>
-          <p>سواء كنت تبحث عن مصور، مونتير، أو خبير ألوان.. أنا هنا لتحويل رؤيتك إلى حقيقة.</p>
+          <p>سواء كنت تبحث عن مصور، مونتير، أو طيّار درون.. أنا هنا لتحويل رؤيتك إلى حقيقة.</p>
           <a class="btn btn-beige" href="https://wa.me/963996522320" target="_blank" rel="noopener">ابدأ المحادثة</a>
         </div>
         <ul class="contact-list reveal">
@@ -677,7 +681,8 @@
         <select name="service" required>
           <option value="مونتاج">مونتاج</option>
           <option value="تصوير فوتوغرافي">تصوير فوتوغرافي</option>
-          <option value="تصحيح ألوان">تصحيح ألوان</option>
+          <option value="موشن غرافيك">موشن غرافيك</option>
+          <option value="تصوير بالدرون">تصوير بالدرون</option>
           <option value="تغطية فعالية">تغطية فعالية</option>
           <option value="شي تاني">شي تاني</option>
         </select>
@@ -716,7 +721,6 @@
       { type: "reel", title: "المهرجان الدولي للشعر العربي", image: "images/works/reel-04.webp", link: "https://drive.google.com/file/d/1KoioczdASDQXOmpJdt9C28StU--D6uT7/view" },
       { type: "reel", title: "الحياة الطبية", image: "images/works/reel-01.webp", link: "https://drive.google.com/file/d/1Z7oQeHWCbyDIq6jHEHRkBKDHmtL7xe6a/view" },
       { type: "reel", title: "دورة المحاسبة لغير المختصين", image: "images/works/reel-06.webp", link: "https://drive.google.com/file/d/1dGcGybUk6kuTTA8GTPj55vCuavBmvlif/view" },
-      { type: "reel", title: "تعديل الألوان", image: "images/works/reel-05.webp", link: "https://drive.google.com/file/d/1nIftpr-UWNcAaOz4FOdYPdwK-2JZjcKE/view" },
       { type: "photo", image: "images/works/photo-08.webp", link: "images/works/photo-08.webp" },
       { type: "photo", image: "images/works/photo-02.webp", link: "images/works/photo-02.webp" },
       { type: "photo", image: "images/works/photo-04.webp", link: "images/works/photo-04.webp" },
@@ -771,11 +775,19 @@
     onScroll();
 
     // الشريطين المتحركين بقسم المهارات: الكلمات بتتكرر لتعبّي العرض، والنسخة التانية بتخلّي الحركة بلا قطع
-    const RIBBON_WORDS = ["مونتاج", "تصوير فوتوغرافي", "تصحيح ألوان", "موشن غرافيك", "تغطية فعاليات", "برومو", "ريلز"];
-    const APERTURE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M14.3 8l5.7 10M9.7 8h11.5M7.4 12l5.7-10M9.7 16L4 6M14.3 16H2.8M16.6 12l-5.7 10"/></svg>';
+    const RIBBON_WORDS = ["مونتاج", "تصوير فوتوغرافي", "تصوير بالدرون", "موشن غرافيك", "تغطية فعاليات", "برومو", "ريلز"];
+    // الفواصل: كاميرا فيديو، كاميرا تصوير، مقص المونتاج، ودرون، بالتناوب
+    const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+    const RIBBON_ICONS = [
+      svg('<rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4V8z"/>'),
+      svg('<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3.5"/>'),
+      svg('<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/>'),
+      svg('<rect x="9.5" y="9.5" width="5" height="5" rx="1.2"/><path d="M9.5 9.5 7 7M14.5 9.5 17 7M9.5 14.5 7 17M14.5 14.5 17 17"/><circle cx="5" cy="5" r="2.8"/><circle cx="19" cy="5" r="2.8"/><circle cx="5" cy="19" r="2.8"/><circle cx="19" cy="19" r="2.8"/>'),
+    ];
     document.querySelectorAll("[data-ribbon]").forEach((track, n) => {
       const words = n ? [...RIBBON_WORDS].reverse() : RIBBON_WORDS;
-      const half = [...words, ...words].map(w => `<div class="ribbon-item"><span>${w}</span>${APERTURE}</div>`).join("");
+      const half = [...words, ...words].map((w, i) =>
+        `<div class="ribbon-item"><span>${w}</span><i style="animation-delay:${-(i % 4) * .7}s">${RIBBON_ICONS[i % RIBBON_ICONS.length]}</i></div>`).join("");
       track.innerHTML = half + half;
     });
 
